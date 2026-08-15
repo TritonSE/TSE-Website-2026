@@ -6,20 +6,9 @@ import QuoteReveal from "@/components/home/QuoteReveal";
 export default function Home() {
   return (
     <main>
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 0,
-        }}
-      >
-        <QuoteReveal />
-      </div>
-
       <section
         style={{
           position: "relative",
-          zIndex: 1,
           minHeight: "100vh",
           backgroundImage: "url('/images/great-wave.png')",
           backgroundSize: "100% 100%",
@@ -30,12 +19,22 @@ export default function Home() {
         <Navbar />
       </section>
 
-      <div style={{ height: "150vh" }} />
+      <QuoteReveal />
 
-      <div style={{ position: "relative", zIndex: 1 }}>
-        <ImpactStats />
-        <Footer />
-      </div>
+      <section
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#fffffb",
+          color: "#08090a",
+          fontSize: "48px",
+        }}
+      >
+        <ImpactStats/>
+        <Footer/>
+      </section>
     </main>
   );
 }

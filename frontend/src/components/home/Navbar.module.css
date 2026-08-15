@@ -24,8 +24,6 @@
 }
 
 .navLink {
-  position: relative;
-
   display: inline-flex;
   height: 30px;
   align-items: center;
@@ -42,22 +40,25 @@
   text-transform: uppercase;
 }
 
-.navLink::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
+.flipText {
+  position: relative;
 
-  width: 100%;
-  height: 1px;
+  display: inline-block;
+  height: 24px;
 
-  background: #fffffb;
-  opacity: 0;
-
-  transition: opacity 0.4s ease-in;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.navLink:hover::after {
-  opacity: 1;
+.flipTextTop,
+.flipTextBottom {
+  display: block;
+}
+
+.flipTextBottom {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .dropdown {
@@ -90,29 +91,6 @@
   cursor: pointer;
 }
 
-.dropdownLabel {
-  position: relative;
-}
-
-.dropdownLabel::after {
-  content: "";
-  position: absolute;
-  top: calc(100% + 3px);
-  left: 0;
-
-  width: 100%;
-  height: 1px;
-
-  background: #fffffb;
-  opacity: 0;
-
-  transition: opacity 0.4s ease-in;
-}
-
-.dropdownButton:hover .dropdownLabel::after {
-  opacity: 1;
-}
-
 .chevron {
   flex-shrink: 0;
 
@@ -134,6 +112,7 @@
   align-items: center;
   gap: 10px;
 }
+
 .dropdownItem {
   display: flex;
   width: 146px;
