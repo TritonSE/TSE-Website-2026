@@ -1,0 +1,9 @@
+node .secret-scan/secret-scan.js
+
+cd frontend
+npm run lint
+npm run format-check
+
+cd ../backend
+npm run lint
+npm run format-check

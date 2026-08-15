@@ -1,0 +1,24 @@
+{
+  "name": "tse-website-2026",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TritonSE/TSE-Website-2026.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TritonSE/TSE-Website-2026/issues"
+  },
+  "homepage": "https://github.com/TritonSE/TSE-Website-2026#readme",
+  "description": "",
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
