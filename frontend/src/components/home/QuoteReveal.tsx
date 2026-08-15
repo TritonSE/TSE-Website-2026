@@ -14,7 +14,7 @@ export default function QuoteReveal() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const revealStart = window.innerHeight * 0.25;
+      const revealStart = window.innerHeight;
       const revealDistance = window.innerHeight * 1.25;
 
       const scrolled = window.scrollY - revealStart;
