@@ -4,21 +4,44 @@ import QuoteReveal from "@/components/home/QuoteReveal";
 export default function Home() {
   return (
     <main>
-      <section
+      <div
         style={{
           position: "relative",
-          minHeight: "100vh",
-          backgroundImage: "url('/images/great-wave.png')",
-          backgroundSize: "100% 100%",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          height: "350vh",
         }}
       >
-        <Navbar />
-      </section>
+        {/* Quote sits behind the hero */}
+        <div
+          style={{
+            position: "sticky",
+            top: 0,
+            height: "100vh",
+            zIndex: 0,
+          }}
+        >
+          <QuoteReveal />
+        </div>
 
-      <QuoteReveal />
+        {/* Hero sits on top and scrolls upward normally */}
+        <section
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            minHeight: "100vh",
+            zIndex: 1,
+            backgroundImage: "url('/images/great-wave.png')",
+            backgroundSize: "100% 100%",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <Navbar />
+        </section>
+      </div>
 
+      {/* Everything after the quote is normal page flow */}
       <section
         style={{
           minHeight: "100vh",
