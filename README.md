@@ -36,26 +36,33 @@ Runs on http://localhost:3001.
 
 Run from either frontend or backend:
 
-`npm run lint`
-`npm run format-check`
+```bash
+npm run lint
+npm run format-check
+```
 
 ### Automatically format files:
 
-`npm run format`
-
+```bash
+npm run format
+```
 
 ## Build
 
 ### Frontend:
 
-`cd frontend`
-`npm run build`
+```bash
+cd frontend
+npm run build
+```
 
 ### Backend:
 
-`cd backend`
-`npm run build`
-`npm start`
+```bash
+cd backend
+npm run build
+npm start
+```
 
 ## Git Hooks
 
