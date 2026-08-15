@@ -2,9 +2,43 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "motion/react";
 import { useState } from "react";
 
 import styles from "./Navbar.module.css";
+
+function FlipText({ children }: { children: string }) {
+  return (
+    <motion.span
+      className={styles.flipText}
+      initial="rest"
+      animate="rest"
+      whileHover="hover"
+    >
+      <motion.span
+        className={styles.flipTextTop}
+        variants={{
+          rest: { y: "0%" },
+          hover: { y: "-100%" },
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
+        {children}
+      </motion.span>
+
+      <motion.span
+        className={styles.flipTextBottom}
+        variants={{
+          rest: { y: "100%" },
+          hover: { y: "0%" },
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
+        {children}
+      </motion.span>
+    </motion.span>
+  );
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,15 +56,15 @@ export default function Navbar() {
 
       <div className={styles.links}>
         <Link href="/about" className={styles.navLink}>
-          About
+          <FlipText>About</FlipText>
         </Link>
 
         <Link href="/team" className={styles.navLink}>
-          Team
+          <FlipText>Team</FlipText>
         </Link>
 
         <Link href="/projects" className={styles.navLink}>
-          Projects
+          <FlipText>Projects</FlipText>
         </Link>
 
         <div className={styles.dropdown}>
@@ -40,7 +74,7 @@ export default function Navbar() {
             onClick={() => setIsOpen((open) => !open)}
             aria-expanded={isOpen}
           >
-            <span className={styles.dropdownLabel}>Work With Us</span>
+            <FlipText>Work With Us</FlipText>
 
             <svg
               className={`${styles.chevron} ${
