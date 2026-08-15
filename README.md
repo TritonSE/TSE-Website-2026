@@ -54,3 +54,7 @@ Backend:
 cd backend
 npm run build
 npm start
+
+## Git Hooks
+
+Husky runs secret scanning, linting, and formatting checks before commits, and builds the frontend and backend before pushes.
