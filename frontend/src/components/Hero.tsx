@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import Button from "./Button";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -16,13 +15,13 @@ export default function Hero() {
         </div>
 
         <div className={styles.ctas}>
-          <Link href="/members" className={styles.cta}>
-            <span className={styles.ctaLabel}>Join Our Team</span>
-          </Link>
+          <Button href="/members" variant="dark">
+            Join Our Team
+          </Button>
 
-          <Link href="/contact" className={styles.cta}>
-            <span className={styles.ctaLabel}>Contact Us</span>
-          </Link>
+          <Button href="/contact" variant="light" arrow>
+            Contact Us
+          </Button>
         </div>
       </div>
 
