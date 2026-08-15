@@ -1,3 +1,4 @@
+import ImpactStats from "@/components/home/ImpactStats";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
 
@@ -29,6 +30,10 @@ export default function Home() {
       </section>
 
       <div style={{ height: "150vh" }} />
+
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <ImpactStats />
+      </div>
     </main>
   );
 }
