@@ -1,3 +1,4 @@
+import Footer from "@/components/home/Footer";
 import ImpactStats from "@/components/home/ImpactStats";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
@@ -33,6 +34,7 @@ export default function Home() {
 
       <div style={{ position: "relative", zIndex: 1 }}>
         <ImpactStats />
+        <Footer />
       </div>
     </main>
   );
