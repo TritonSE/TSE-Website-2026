@@ -1,0 +1,167 @@
+.navbar {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  right: 50px;
+  z-index: 10;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  width: 21px;
+  height: 29px;
+}
+
+.links {
+  display: inline-flex;
+  height: 160px;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.navLink {
+  position: relative;
+
+  display: inline-flex;
+  height: 30px;
+  align-items: center;
+
+  color: #fffffb;
+  text-decoration: none;
+  text-align: center;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: #fffffb;
+  opacity: 0;
+
+  transition: opacity 0.4s ease-in;
+}
+
+.navLink:hover::after {
+  opacity: 1;
+}
+
+.dropdown {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.dropdownButton {
+  display: inline-flex;
+  height: 30px;
+  align-items: center;
+  gap: 12px;
+
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  color: #fffffb;
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.dropdownLabel {
+  position: relative;
+}
+
+.dropdownLabel::after {
+  content: "";
+  position: absolute;
+  top: calc(100% + 3px);
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: #fffffb;
+  opacity: 0;
+
+  transition: opacity 0.4s ease-in;
+}
+
+.dropdownButton:hover .dropdownLabel::after {
+  opacity: 1;
+}
+
+.chevron {
+  flex-shrink: 0;
+
+  transition: transform 0.4s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropdownItem {
+  display: flex;
+  width: 146px;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  border: 1px solid #85898e;
+  background: transparent;
+
+  color: #85898e;
+  text-decoration: none;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+
+  transition:
+    color 0.2s ease-in,
+    border-color 0.2s ease-in;
+}
+
+.dropdownItem:hover {
+  border-color: #fffffb;
+  color: #fffffb;
+}
