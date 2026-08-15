@@ -12,6 +12,7 @@ type CountUpProps = {
   className: string;
   startWhen: boolean;
   separator: string;
+  padStart?: number;
   onStart?: () => void;
   onEnd?: () => void;
 };
@@ -25,6 +26,7 @@ export default function CountUp({
   className = "",
   startWhen = true,
   separator = "",
+  padStart,
   onStart,
   onEnd,
 }: CountUpProps) {

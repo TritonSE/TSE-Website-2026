@@ -34,7 +34,6 @@ const stats: Stat[] = [
 export default function ImpactStats() {
   return (
     <section className={styles.section}>
-      <div className={styles.stats}>
         {stats.map((stat) => (
           <div className={styles.stat} key={stat.description}>
             <div className={styles.number}>
@@ -54,7 +53,6 @@ export default function ImpactStats() {
             <p className={styles.description}>{stat.description}</p>
           </div>
         ))}
-      </div>
     </section>
   );
 }
