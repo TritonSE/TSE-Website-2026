@@ -1,0 +1,56 @@
+# TSE Website 2026
+
+Official website for Triton Software Engineering.
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Express.js
+- ESLint
+- Prettier
+- Husky
+
+## Setup
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Runs on http://localhost:3000.
+
+### Backend
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+Runs on http://localhost:3001.
+
+Linting
+
+Run from either frontend or backend:
+
+npm run lint
+npm run format-check
+
+Automatically format files:
+
+npm run format
+Build
+
+Frontend:
+
+cd frontend
+npm run build
+
+Backend:
+
+cd backend
+npm run build
+npm start
