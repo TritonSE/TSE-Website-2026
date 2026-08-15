@@ -1,0 +1,182 @@
+.hero {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+
+  padding: 0 50px 56px 50px;
+
+  /* Let clicks fall through everywhere except the interactive children */
+  pointer-events: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.eyebrow {
+  color: #f4b82e;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.heading {
+  max-width: 400px;
+
+  color: #fffffb;
+
+  /* Stack Sans Notch is not bundled yet — falls back to a system sans */
+  font-family:
+    "Stack Sans Notch",
+    "Stack Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 44px;
+  letter-spacing: -1.2px;
+}
+
+.ctas {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+
+  margin-top: 8px;
+}
+
+.cta {
+  position: relative;
+  overflow: hidden;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  /* Frosted glass: faint tint + blur the wave dots behind the box */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(4px);
+
+  color: #fffffb;
+  text-decoration: none;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Translucent light bar that fills the box left -> right while hovered */
+.cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 0;
+  height: 100%;
+
+  background: rgba(255, 255, 255, 0.3);
+
+  transition: width 0.4s ease;
+}
+
+.ctaLabel {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cta:hover::before {
+    width: 100%;
+  }
+}
+
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  pointer-events: auto;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+
+  background-color: #f4b82e;
+
+  /* Blinks back and forth between accent and white (slow, WCAG-safe) */
+  animation: dotBlink 1.4s infinite;
+}
+
+.locationText {
+  color: #fffffb;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+@keyframes dotBlink {
+  0%,
+  49% {
+    background-color: #f4b82e;
+  }
+  50%,
+  100% {
+    background-color: #fffffb;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+
+    padding: 0 24px 40px 24px;
+  }
+
+  .heading {
+    font-size: 34px;
+    line-height: 38px;
+  }
+
+  .ctas {
+    flex-wrap: wrap;
+  }
+}
