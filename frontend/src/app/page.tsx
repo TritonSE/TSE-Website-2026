@@ -1,3 +1,4 @@
+import Hero from "@/components/Hero";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
 
@@ -38,6 +39,7 @@ export default function Home() {
           }}
         >
           <Navbar />
+          <Hero />
         </section>
       </div>
 
