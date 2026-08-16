@@ -48,9 +48,9 @@ export default function Home() {
         style={{
           minHeight: "100vh",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#fffffb",
           color: "#08090a",
           fontSize: "48px",
         }}
