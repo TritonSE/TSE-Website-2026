@@ -1,3 +1,5 @@
+import Footer from "@/components/home/Footer";
+import ImpactStats from "@/components/home/ImpactStats";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
 import CompanyCarousel from "@/components/home/CompanyCarousel";
@@ -50,14 +52,15 @@ export default function Home() {
         style={{
           minHeight: "100vh",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#fffffb",
           color: "#08090a",
           fontSize: "48px",
         }}
       >
-        NEXT SECTION
+        <ImpactStats />
+        <Footer />
       </section>
     </main>
   );
