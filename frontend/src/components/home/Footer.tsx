@@ -140,9 +140,13 @@ export default function Footer() {
           </Link>
         </div>
         <div className={styles.socials}>
-          <Social href="mailto:triton.software.engineering@gmail.com">Email</Social>
+          <Social href="mailto:triton.software.engineering@gmail.com">
+            Email
+          </Social>
           <Social href="https://www.instagram.com/tse.atucsd">Insta</Social>
-          <Social href="https://linkedin.com/company/tritonsoftwareengineering">LinkedIn</Social>
+          <Social href="https://linkedin.com/company/tritonsoftwareengineering">
+            LinkedIn
+          </Social>
           <Social href="https://github.com/TritonSE">GitHub</Social>
         </div>
       </div>
