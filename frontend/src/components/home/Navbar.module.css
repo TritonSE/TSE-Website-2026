@@ -24,8 +24,6 @@
 }
 
 .navLink {
-  position: relative;
-
   display: inline-flex;
   height: 30px;
   align-items: center;
@@ -42,22 +40,25 @@
   text-transform: uppercase;
 }
 
-.navLink::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
+.flipText {
+  position: relative;
 
-  width: 100%;
-  height: 1px;
+  display: inline-block;
+  height: 24px;
 
-  background: #fffffb;
-  opacity: 0;
-
-  transition: opacity 0.4s ease-in;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.navLink:hover::after {
-  opacity: 1;
+.flipTextTop,
+.flipTextBottom {
+  display: block;
+}
+
+.flipTextBottom {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .dropdown {
@@ -88,29 +89,6 @@
   text-transform: uppercase;
 
   cursor: pointer;
-}
-
-.dropdownLabel {
-  position: relative;
-}
-
-.dropdownLabel::after {
-  content: "";
-  position: absolute;
-  top: calc(100% + 3px);
-  left: 0;
-
-  width: 100%;
-  height: 1px;
-
-  background: #fffffb;
-  opacity: 0;
-
-  transition: opacity 0.4s ease-in;
-}
-
-.dropdownButton:hover .dropdownLabel::after {
-  opacity: 1;
 }
 
 .chevron {
@@ -144,7 +122,10 @@
   gap: 12px;
 
   border: 1px solid #85898e;
-  background: transparent;
+
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 
   color: #85898e;
   text-decoration: none;
@@ -157,8 +138,9 @@
   text-transform: uppercase;
 
   transition:
-    color 0.2s ease-in,
-    border-color 0.2s ease-in;
+    color 0.4s ease-in,
+    border-color 0.4s ease-in,
+    background 0.4s ease-in;
 }
 
 .dropdownItem:hover {

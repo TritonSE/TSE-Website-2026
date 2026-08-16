@@ -44,7 +44,7 @@
 
   color: #fffffb;
 
-  font-family: var(--font-stack-sans), sans-serif;
+  font-family: var(--font-stack-sans-notch), sans-serif;
   font-optical-sizing: auto;
   font-size: 40px;
   font-weight: 500;

@@ -9,7 +9,7 @@ const sometypeMono = Sometype_Mono({
 });
 
 const stackSansNotch = Stack_Sans_Notch({
-  variable: "--font-stack-sans",
+  variable: "--font-stack-sans-notch",
   subsets: ["latin"],
 });
 
