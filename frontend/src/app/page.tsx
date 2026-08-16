@@ -55,8 +55,8 @@ export default function Home() {
           fontSize: "48px",
         }}
       >
-        <ImpactStats/>
-        <Footer/>
+        <ImpactStats />
+        <Footer />
       </section>
     </main>
   );

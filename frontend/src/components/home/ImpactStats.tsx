@@ -34,25 +34,25 @@ const stats: Stat[] = [
 export default function ImpactStats() {
   return (
     <section className={styles.section}>
-        {stats.map((stat) => (
-          <div className={styles.stat} key={stat.description}>
-            <div className={styles.number}>
-              <CountUp
-                to={stat.value}
-                from={0}
-                direction="up"
-                delay={0}
-                duration={1}
-                className={styles.countUp}
-                startWhen={true}
-                separator=""
-              />
-              {stat.suffix}
-            </div>
-
-            <p className={styles.description}>{stat.description}</p>
+      {stats.map((stat) => (
+        <div className={styles.stat} key={stat.description}>
+          <div className={styles.number}>
+            <CountUp
+              to={stat.value}
+              from={0}
+              direction="up"
+              delay={0}
+              duration={1}
+              className={styles.countUp}
+              startWhen={true}
+              separator=""
+            />
+            {stat.suffix}
           </div>
-        ))}
+
+          <p className={styles.description}>{stat.description}</p>
+        </div>
+      ))}
     </section>
   );
 }

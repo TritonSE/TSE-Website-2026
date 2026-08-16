@@ -97,8 +97,7 @@ function Social({ href, children }: SocialProps) {
       rel="noopener noreferrer"
       className={styles.social}
     >
-      {children}{" "}
-      <UpArrowRight className={styles.arrow} stroke="currentColor" />
+      {children} <UpArrowRight className={styles.arrow} stroke="currentColor" />
     </Link>
   );
 }
@@ -143,9 +142,7 @@ export default function Footer() {
         <div className={styles.socials}>
           <Social href="mailto:hello@tritonse.org">Email</Social>
           <Social href="https://instagram.com/tritonse">Insta</Social>
-          <Social href="https://linkedin.com/company/tritonse">
-            LinkedIn
-          </Social>
+          <Social href="https://linkedin.com/company/tritonse">LinkedIn</Social>
           <Social href="https://github.com/TritonSE">GitHub</Social>
         </div>
       </div>
