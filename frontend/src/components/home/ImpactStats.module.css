@@ -29,10 +29,6 @@
   line-height: normal;
 }
 
-.countUp {
-  font-variant-numeric: tabular-nums;
-}
-
 .description {
   color: var(--White, #fffffb);
   text-align: center;

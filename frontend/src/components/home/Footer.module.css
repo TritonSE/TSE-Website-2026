@@ -22,6 +22,7 @@
   width: 25vw;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 20px;
 }
 
@@ -51,7 +52,6 @@
   font-size: 150px;
   font-weight: 500;
   line-height: normal;
-  font-variant-numeric: tabular-nums;
 
   perspective: 300px;
 }
@@ -79,7 +79,7 @@
 
   color: #9b9b9b;
   font-family: var(--font-sometype-mono);
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 500;
   letter-spacing: 0.6px;
   text-transform: uppercase;
@@ -160,14 +160,17 @@
     width: 100%;
     align-items: center;
   }
-}
-
-@media (max-width: 700) {
   .section {
     height: 100dvh;
   }
+}
+
+@media (max-width: 700) {
   .links {
     width: 100%;
+  }
+  .section {
+    height: 120dvh;
   }
   .social {
     width: 100%;
