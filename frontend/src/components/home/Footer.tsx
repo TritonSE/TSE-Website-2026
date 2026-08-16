@@ -102,13 +102,45 @@ function Social({ href, children }: SocialProps) {
   );
 }
 
+function FlipText({ children }: { children: string }) {
+  return (
+    <motion.span
+      className={styles.flipText}
+      initial="rest"
+      animate="rest"
+      whileHover="hover"
+    >
+      <motion.span
+        className={styles.flipTextTop}
+        variants={{
+          rest: { y: "0%" },
+          hover: { y: "-100%" },
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
+        {children}
+      </motion.span>
+
+      <motion.span
+        className={styles.flipTextBottom}
+        variants={{
+          rest: { y: "100%" },
+          hover: { y: "0%" },
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
+        {children}
+      </motion.span>
+    </motion.span>
+  );
+}
+
 export default function Footer() {
   return (
-    <section className={styles.section}>
+    <footer className={styles.section}>
       <div className={styles.row}>
         <div className={styles.description}>
           <p className={styles.p}>
-            {" "}
             At Triton Software Engineering, our mission is to craft digital
             solutions for nonprofit organizations in our community.
           </p>
@@ -121,22 +153,22 @@ export default function Footer() {
       <div className={styles.row}>
         <div className={styles.links}>
           <Link href="/" className={styles.link}>
-            Home
+            <FlipText>Home</FlipText>
           </Link>
-          <Link href="/members" className={styles.link}>
-            About
+          <Link href="/about" className={styles.link}>
+            <FlipText>About</FlipText>
           </Link>
           <Link href="/team" className={styles.link}>
-            Team
+            <FlipText>Team</FlipText>
           </Link>
           <Link href="/projects" className={styles.link}>
-            Projects
+            <FlipText>Projects</FlipText>
           </Link>
           <Link href="/members" className={styles.link}>
-            Members
+            <FlipText>Members</FlipText>
           </Link>
           <Link href="/nonprofits" className={styles.link}>
-            Nonprofits
+            <FlipText>Nonprofits</FlipText>
           </Link>
         </div>
         <div className={styles.socials}>
@@ -150,6 +182,6 @@ export default function Footer() {
           <Social href="https://github.com/TritonSE">GitHub</Social>
         </div>
       </div>
-    </section>
+    </footer>
   );
 }

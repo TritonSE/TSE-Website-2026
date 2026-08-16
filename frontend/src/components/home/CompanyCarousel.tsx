@@ -49,14 +49,14 @@ export default function CompanyCarousel() {
           speed={100}
           direction="left"
           logoHeight={60}
-          gap={100}
+          gap={120}
           pauseOnHover={false}
           fadeOut={false}
           scaleOnHover={false}
           ariaLabel="Companies our members work for"
         />
       </div>
-      <div className={styles.carousel}>
+      {/* <div className={styles.carousel}>
         <LogoLoop
           logos={secondRow}
           speed={100}
@@ -68,7 +68,7 @@ export default function CompanyCarousel() {
           scaleOnHover={false}
           ariaLabel="Companies our members work for"
         />
-      </div>
+      </div> */}
     </section>
   );
 }
