@@ -3,10 +3,10 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 
-import { ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 
+import UpArrowRight from "../icons/UpArrowRight";
 import styles from "./Footer.module.css";
 
 const SAN_DIEGO_TIME_ZONE = "America/Los_Angeles";
@@ -97,7 +97,8 @@ function Social({ href, children }: SocialProps) {
       rel="noopener noreferrer"
       className={styles.social}
     >
-      {children} <ArrowUpRight className={styles.arrow} size={20} />
+      {children}{" "}
+      <UpArrowRight className={styles.arrow} stroke="currentColor" />
     </Link>
   );
 }

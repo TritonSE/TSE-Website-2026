@@ -142,7 +142,7 @@
 }
 
 .social:hover {
-  color: #fffff8;
+  color: var(--Gold50, #f9d896);
 }
 
 .arrow {
