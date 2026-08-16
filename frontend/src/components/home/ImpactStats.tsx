@@ -12,7 +12,7 @@ type Stat = {
 
 const stats: Stat[] = [
   {
-    value: 100,
+    value: 96,
     suffix: "",
     description:
       "members, including developers, designers, product managers, and leadership",
