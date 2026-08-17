@@ -168,10 +168,20 @@
   line-height: normal;
   letter-spacing: 0.6px;
   text-transform: uppercase;
+
+  transition: color 0.3s ease;
+}
+
+.socialText {
+  transition: transform 0.3s ease;
 }
 
 .social:hover {
   color: var(--Gold50, #f4b82e);
+}
+
+.social:hover .socialText {
+  transform: translateX(-10px);
 }
 
 .arrow {

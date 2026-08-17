@@ -97,7 +97,8 @@ function Social({ href, children }: SocialProps) {
       rel="noopener noreferrer"
       className={styles.social}
     >
-      {children} <UpArrowRight className={styles.arrow} stroke="currentColor" />
+      <span className={styles.socialText}>{children}</span>
+      <UpArrowRight className={styles.arrow} stroke="currentColor" />
     </Link>
   );
 }
