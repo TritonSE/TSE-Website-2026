@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
@@ -137,6 +138,8 @@ function FlipText({ children }: { children: string }) {
 }
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
     <footer className={styles.section}>
       <div className={styles.row}>
@@ -153,23 +156,41 @@ export default function Footer() {
       </div>
       <div className={styles.row}>
         <div className={styles.links}>
-          <Link href="/" className={styles.link}>
+          <Link
+            href="/"
+            className={`${styles.link} ${pathname === "/" ? styles.active : ""}`}
+          >
             <FlipText>Home</FlipText>
           </Link>
-          <Link href="/about" className={styles.link}>
-            <FlipText>About</FlipText>
-          </Link>
-          <Link href="/team" className={styles.link}>
-            <FlipText>Team</FlipText>
-          </Link>
-          <Link href="/projects" className={styles.link}>
-            <FlipText>Projects</FlipText>
-          </Link>
-          <Link href="/members" className={styles.link}>
+          <Link
+            href="/members"
+            className={`${styles.link} ${pathname === "/members" ? styles.active : ""}`}
+          >
             <FlipText>Members</FlipText>
           </Link>
-          <Link href="/nonprofits" className={styles.link}>
+          <Link
+            href="/about"
+            className={`${styles.link} ${pathname === "/about" ? styles.active : ""}`}
+          >
+            <FlipText>About</FlipText>
+          </Link>
+          <Link
+            href="/nonprofits"
+            className={`${styles.link} ${pathname === "/nonprofits" ? styles.active : ""}`}
+          >
             <FlipText>Nonprofits</FlipText>
+          </Link>
+          <Link
+            href="/projects"
+            className={`${styles.link} ${pathname === "/projects" ? styles.active : ""}`}
+          >
+            <FlipText>Projects</FlipText>
+          </Link>
+          <Link
+            href="/sponsors"
+            className={`${styles.link} ${pathname === "/sponsors" ? styles.active : ""}`}
+          >
+            <FlipText>Sponsors</FlipText>
           </Link>
         </div>
         <div className={styles.socials}>

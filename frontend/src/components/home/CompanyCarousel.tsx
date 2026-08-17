@@ -56,7 +56,7 @@ export default function CompanyCarousel() {
           ariaLabel="Companies our members work for"
         />
       </div>
-      {/* <div className={styles.carousel}>
+      <div className={styles.carousel}>
         <LogoLoop
           logos={secondRow}
           speed={100}
@@ -68,7 +68,7 @@ export default function CompanyCarousel() {
           scaleOnHover={false}
           ariaLabel="Companies our members work for"
         />
-      </div> */}
+      </div>
     </section>
   );
 }

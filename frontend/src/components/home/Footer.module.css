@@ -146,6 +146,10 @@
   color: var(--White, #fffffb);
 }
 
+.active {
+  color: #fffffb;
+}
+
 .socials {
   display: flex;
   flex-direction: column;
