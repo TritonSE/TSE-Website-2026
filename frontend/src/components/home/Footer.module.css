@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  height: 80dvh;
+  height: 70dvh;
   padding: 120px 120px;
 
   background: #08090a;
@@ -70,6 +70,18 @@
 
 .clockColon {
   padding: 0 4px;
+  animation: colonBlink 1.4s infinite;
+}
+
+@keyframes colonBlink {
+  0%,
+  49% {
+    color: #fffffb;
+  }
+  50%,
+  100% {
+    color: #08090a;
+  }
 }
 
 .clockCaption {
@@ -86,10 +98,22 @@
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: #f5a623;
+  background-color: #f4b82e;
+  animation: dotBlink 1.4s infinite;
+}
+
+@keyframes dotBlink {
+  0%,
+  49% {
+    background-color: #f4b82e;
+  }
+  50%,
+  100% {
+    background-color: #fffffb;
+  }
 }
 
 .links {
@@ -101,20 +125,29 @@
 }
 
 .link {
-  color: var(--Gray80, #5c6269);
+  display: inline-flex;
+  align-items: center;
 
-  /* Eyebrow */
-  font-family: "Sometype Mono";
+  color: var(--Gray80, #5c6269);
+  text-decoration: none;
+
+  font-family: var(--font-sometype-mono);
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   letter-spacing: 0.6px;
   text-transform: uppercase;
+
+  transition: color 0.3s ease;
 }
 
 .link:hover {
   color: var(--White, #fffffb);
+}
+
+.active {
+  color: #fffffb;
 }
 
 .socials {
@@ -139,10 +172,20 @@
   line-height: normal;
   letter-spacing: 0.6px;
   text-transform: uppercase;
+
+  transition: color 0.3s ease;
+}
+
+.socialText {
+  transition: transform 0.3s ease;
 }
 
 .social:hover {
-  color: var(--Gold50, #f9d896);
+  color: var(--Gold50, #f4b82e);
+}
+
+.social:hover .socialText {
+  transform: translateX(-10px);
 }
 
 .arrow {
@@ -175,4 +218,23 @@
   .social {
     width: 100%;
   }
+}
+
+.flipText {
+  position: relative;
+  display: inline-block;
+  height: 24px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.flipTextTop,
+.flipTextBottom {
+  display: block;
+}
+
+.flipTextBottom {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

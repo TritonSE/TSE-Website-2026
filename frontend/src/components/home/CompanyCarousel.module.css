@@ -1,0 +1,31 @@
+.section {
+  display: flex;
+  width: 100%;
+  min-height: 315px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding-bottom: 60px;
+
+  overflow: hidden;
+
+  background: #08090a;
+}
+
+.title {
+  margin: 0;
+
+  color: #fffffb;
+
+  text-align: center;
+  font-family: var(--font-stack-sans-notch);
+  font-size: 36px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.carousel {
+  width: 100%;
+  overflow: hidden;
+}

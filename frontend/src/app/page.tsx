@@ -2,6 +2,7 @@ import Footer from "@/components/home/Footer";
 import ImpactStats from "@/components/home/ImpactStats";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
+import CompanyCarousel from "@/components/home/CompanyCarousel";
 
 export default function Home() {
   return (
@@ -44,6 +45,9 @@ export default function Home() {
       </div>
 
       {/* Everything after the quote is normal page flow */}
+
+      <CompanyCarousel />
+
       <section
         style={{
           minHeight: "100vh",
