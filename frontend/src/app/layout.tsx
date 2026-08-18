@@ -9,6 +9,7 @@ import "./globals.css";
 const sometypeMono = Sometype_Mono({
   variable: "--font-sometype-mono",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 const stackSansNotch = Stack_Sans_Notch({

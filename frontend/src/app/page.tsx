@@ -1,5 +1,6 @@
 import Footer from "@/components/home/Footer";
 import ImpactStats from "@/components/home/ImpactStats";
+import Hero from "@/components/Hero";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
 import CompanyCarousel from "@/components/home/CompanyCarousel";
@@ -41,6 +42,7 @@ export default function Home() {
           }}
         >
           <Navbar />
+          <Hero />
         </section>
       </div>
 
