@@ -1,6 +1,9 @@
+import Footer from "@/components/home/Footer";
+import ImpactStats from "@/components/home/ImpactStats";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
+import CompanyCarousel from "@/components/home/CompanyCarousel";
 
 export default function Home() {
   return (
@@ -44,18 +47,22 @@ export default function Home() {
       </div>
 
       {/* Everything after the quote is normal page flow */}
+
+      <CompanyCarousel />
+
       <section
         style={{
           minHeight: "100vh",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#fffffb",
           color: "#08090a",
           fontSize: "48px",
         }}
       >
-        NEXT SECTION
+        <ImpactStats />
+        <Footer />
       </section>
     </main>
   );
