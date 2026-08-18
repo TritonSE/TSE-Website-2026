@@ -32,7 +32,7 @@
   color: #f4b82e;
 
   font-family: var(--font-sometype-mono);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   line-height: normal;
   letter-spacing: 1px;
@@ -40,13 +40,13 @@
 }
 
 .heading {
-  max-width: 425px;
+  max-width: 540px;
 
   color: #fffffb;
 
   font-family: var(--font-stack-sans-notch), sans-serif;
   font-optical-sizing: auto;
-  font-size: 40px;
+  font-size: 46px;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0;
@@ -55,7 +55,7 @@
 .ctas {
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: 24px;
 
   margin-top: 8px;
 }
@@ -85,7 +85,7 @@
   color: #fffffb;
 
   font-family: var(--font-sometype-mono);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.6px;
@@ -113,7 +113,7 @@
   }
 
   .heading {
-    font-size: 34px;
+    font-size: 38px;
     line-height: 1.2;
   }
 

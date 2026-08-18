@@ -1,4 +1,5 @@
 import Button from "./Button";
+import Magnet from "./reactbits/Magnet/Magnet";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -15,13 +16,17 @@ export default function Hero() {
         </div>
 
         <div className={styles.ctas}>
-          <Button href="/members" variant="dark">
-            Join Our Team
-          </Button>
+          <Magnet padding={40} magnetStrength={14}>
+            <Button href="/members" variant="dark">
+              Join Our Team
+            </Button>
+          </Magnet>
 
-          <Button href="/contact" variant="light" arrow>
-            Contact Us
-          </Button>
+          <Magnet padding={40} magnetStrength={14}>
+            <Button href="/contact" variant="light" arrow>
+              Contact Us
+            </Button>
+          </Magnet>
         </div>
       </div>
 
