@@ -2,6 +2,7 @@ import Footer from "@/components/home/Footer";
 import ImpactStats from "@/components/home/ImpactStats";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/home/Navbar";
+import PixelWaveHero from "@/components/PixelWaveHero";
 import QuoteReveal from "@/components/home/QuoteReveal";
 import CompanyCarousel from "@/components/home/CompanyCarousel";
 
@@ -35,12 +36,10 @@ export default function Home() {
             width: "100%",
             minHeight: "100vh",
             zIndex: 1,
-            backgroundImage: "url('/images/great-wave.png')",
-            backgroundSize: "100% 100%",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            backgroundColor: "#050505",
           }}
         >
+          <PixelWaveHero src="/images/great-wave_small_transparent.png" />
           <Navbar />
           <Hero />
         </section>
