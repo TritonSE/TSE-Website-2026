@@ -50,40 +50,20 @@
   color: #0a0a0a;
 }
 
-/* ---- chevron -> arrow icon ----
-   Icon slot is chevron-width by default and grows to fit the arrow on hover,
-   which extends the button box to the right. The chevron/arrow are overlaid
-   (absolutely positioned) and swapped instantly via opacity. */
+/* ---- chevron icon ----
+   Chevron sits at a fixed slot and slides right on hover. */
 .icon {
-  position: relative;
-
   display: inline-flex;
   align-items: center;
 
-  width: 7px;
   height: 12px;
   margin-left: 10px;
-
-  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.icon svg {
-  position: absolute;
-  top: 0;
-
-  display: block;
-
-  transition: opacity 0.35s ease;
 }
 
 .chevron {
-  left: 8px;
-  opacity: 1;
-}
+  display: block;
 
-.arrow {
-  left: 8px;
-  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -100,16 +80,7 @@
     background: #d9d9d3;
   }
 
-  /* Box extends to fit the arrow (chevron 7px -> arrow slot 21px) */
-  .button:hover .icon {
-    width: 21px;
-  }
-
   .button:hover .chevron {
-    opacity: 0;
-  }
-
-  .button:hover .arrow {
-    opacity: 1;
+    transform: translateX(6px);
   }
 }

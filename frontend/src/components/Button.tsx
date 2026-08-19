@@ -11,7 +11,7 @@ type ButtonProps = {
   href?: string;
   /** Color scheme. "dark" = frosted -> black on hover, "light" = solid light. */
   variant?: ButtonVariant;
-  /** Show the chevron that morphs into an arrow on hover. */
+  /** Show the chevron that slides right on hover. */
   arrow?: boolean;
   className?: string;
   type?: "button" | "submit" | "reset";
@@ -30,27 +30,6 @@ function Chevron() {
     >
       <path
         d="M1 1L6 6L1 11"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function Arrow() {
-  return (
-    <svg
-      className={styles.arrow}
-      width="16"
-      height="12"
-      viewBox="0 0 16 12"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M1 6H15M15 6L10 1M15 6L10 11"
         stroke="currentColor"
         strokeWidth="1.6"
         strokeLinecap="round"
@@ -79,7 +58,6 @@ export default function Button({
       {arrow && (
         <span className={styles.icon} aria-hidden="true">
           <Chevron />
-          <Arrow />
         </span>
       )}
     </>
