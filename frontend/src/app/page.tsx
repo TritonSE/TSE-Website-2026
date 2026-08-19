@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
 import CompanyCarousel from "@/components/home/CompanyCarousel";
+import ProjectsCarousel from "@/components/home/ProjectsCarousel";
 
 export default function Home() {
   return (
@@ -47,6 +48,7 @@ export default function Home() {
       </div>
 
       {/* Everything after the quote is normal page flow */}
+      <ProjectsCarousel />
 
       <CompanyCarousel />
 

@@ -1,6 +1,6 @@
 "use client";
 
-import CountUp from "@/components/CountUp";
+import CountUp from "@/components/reactbits/CountUp/CountUp";
 
 import styles from "./ImpactStats.module.css";
 
