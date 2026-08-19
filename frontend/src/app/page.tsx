@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
 import CompanyCarousel from "@/components/home/CompanyCarousel";
+import AboutUs from "@/components/home/AboutUs";
 
 export default function Home() {
   return (
@@ -62,6 +63,9 @@ export default function Home() {
         }}
       >
         <ImpactStats />
+
+        <AboutUs />
+
         <Footer />
       </section>
     </main>
