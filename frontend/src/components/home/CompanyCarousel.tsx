@@ -62,7 +62,7 @@ export default function CompanyCarousel() {
           speed={100}
           direction="right"
           logoHeight={60}
-          gap={100}
+          gap={120}
           pauseOnHover={false}
           fadeOut={false}
           scaleOnHover={false}
