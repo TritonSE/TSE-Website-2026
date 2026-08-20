@@ -4,18 +4,23 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { usePixelRevealPhysics, type Particle } from "@/hooks/usePixelRevealPhysics";
 
+// ~15,000s (4hr) cycle so each particle is bright for ~15s per pass. Paired
+// with twinkleWidth = 0.001 below, that also puts ~1/1000 particles bright
+// at any given instant (see the comment where twinkleFreq is assigned).
+const TWINKLE_BASE_FREQ = (2 * Math.PI) / 1_000_000;
+
 interface PixelWaveHeroProps {
   src: string;
   className?: string;
   cellSize?: number; // sampling grid step, in source-image px
   particleSize?: number; // base rendered dot size, in css px
+  baseOpacity?: number; // resting per-pixel opacity between twinkles, 0-1
   minAlpha?: number; // ignore fully-transparent source pixels below this alpha (0-255)
   progress?: number; // externally controlled reveal progress, 0-100
   revealDuration?: number; // ms to auto-drive progress 0->100 when `progress` is not supplied
   fadeInMs?: number; // duration of the per-particle fade-in ease once revealed
-  twinkleSharpness?: number; // higher = sparser, brighter, shorter twinkle spikes
-  twinkleScaleBoost?: number; // e.g. 1.6 = twinkling particles render up to 60% larger
-  twinkleAlphaBoost?: number; // additive alpha boost at peak twinkle
+  twinkleWidth?: number; // 0-1, fraction of each cycle the gaussian pulse occupies; lower = rarer, sharper spikes
+  twinkleScaleBoost?: number; // e.g. 1.6 = twinkling particles render up to 60% larger, and opacity grows by the same ratio
 }
 
 export default function PixelWaveHero({
@@ -23,13 +28,13 @@ export default function PixelWaveHero({
   className,
   cellSize = 1,
   particleSize = 3,
+  baseOpacity = 0.4,
   minAlpha = 10,
   progress,
   revealDuration = 10000,
   fadeInMs = 220,
-  twinkleSharpness = 8,
+  twinkleWidth = 0.002,
   twinkleScaleBoost = 1.6,
-  twinkleAlphaBoost = 0.4,
 }: PixelWaveHeroProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -92,7 +97,12 @@ export default function PixelWaveHero({
             // Randomized independently of position so the reveal resolves in
             // scattered clusters everywhere at once, not a directional wipe.
             revealAt: Math.random() * 100,
-            twinkleFreq: 0.0002 + Math.random() * 0.0006,
+            // twinkleWidth is the fraction of each particle's cycle spent
+            // bright, which (with random phases) is also the fraction of
+            // all particles bright at any instant. So a ~15s bright window
+            // out of a ~15,000s (4hr) period gives both "bright for 15s"
+            // and "~1/1000 bright at once" from the same 0.001 width.
+            twinkleFreq: TWINKLE_BASE_FREQ * (0.85 + Math.random() * 0.3),
             twinklePhase: Math.random() * Math.PI * 2,
             revealedAt: null,
           });
@@ -138,12 +148,12 @@ export default function PixelWaveHero({
     canvasRef,
     particlesRef,
     particleSize,
+    baseOpacity,
     progress,
     revealDuration,
     fadeInMs,
-    twinkleSharpness,
+    twinkleWidth,
     twinkleScaleBoost,
-    twinkleAlphaBoost,
   });
 
   return (
@@ -154,7 +164,7 @@ export default function PixelWaveHero({
     >
       <canvas
         ref={canvasRef}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.3 }}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 1 }}
       />
       {status === "error" && (
         <p style={{ color: "#e66", fontFamily: "monospace", padding: "1rem" }}>
