@@ -52,10 +52,9 @@ export default function AboutUs() {
         <h2 className={styles.heading}>So what&rsquo;s the story?</h2>
         <p className={styles.body}>
           In the Spring of 2017, a group of undergraduate students here at UC
-          San Diego saw a problem: many nonprofit organizations had little to
-          no resources for professional web and technical development
-          services. To solve it, they banded together to create Triton
-          Software Engineering.
+          San Diego saw a problem: many nonprofit organizations had little to no
+          resources for professional web and technical development services. To
+          solve it, they banded together to create Triton Software Engineering.
         </p>
         <Button href="/about" variant="dark">
           tell me more
