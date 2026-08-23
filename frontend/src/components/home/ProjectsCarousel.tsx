@@ -18,6 +18,7 @@ interface Project {
   title: string;
   description: string;
   image: string;
+  slug: string;
 }
 
 const projects: Project[] = [
@@ -26,46 +27,37 @@ const projects: Project[] = [
     description:
       "Designing a website and admin portal to provide microloan and entrepreneurial support for small businesses.",
     image: "/images/projects/f3-thumbnail.png",
+    slug: "f3global-website",
   },
   {
     title: "HoMEwork Revamp",
     description:
       "Website highlighting HoMEwork's available resources, including events, contact information, donating, and news.",
     image: "/images/projects/homework-thumbnail.png",
+    slug: "homework-revamp",
   },
   {
     title: "F3Global Website 2",
     description:
       "Designing a website and admin portal to provide microloan and entrepreneurial support for small businesses.",
     image: "/images/projects/f3-thumbnail.png",
+    slug: "f3global-website-2",
   },
   {
     title: "HoMEwork Revamp 2",
     description:
       "Website highlighting HoMEwork's available resources, including events, contact information, donating, and news.",
     image: "/images/projects/homework-thumbnail.png",
+    slug: "homework-revamp-2",
   },
 ];
 
-// Drag distance (px) needed to advance to the next/previous card.
-const DRAG_THRESHOLD = 60;
-// Accumulated wheel delta (px) needed to advance to the next/previous card.
-const WHEEL_THRESHOLD = 50;
-
 export default function ProjectsCarousel() {
   const viewportRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const cardRefs = useRef<Array<HTMLAnchorElement | null>>([]);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [baseOffset, setBaseOffset] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const dragStartXRef = useRef(0);
-  const wheelAccumRef = useRef(0);
-  const wheelResetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
-    null,
-  );
 
   const goToIndex = useCallback((index: number) => {
     setActiveIndex(Math.max(0, Math.min(projects.length - 1, index)));
@@ -73,7 +65,7 @@ export default function ProjectsCarousel() {
 
   // The active card's center aligns with the viewport's center, except for
   // the first card, which is clamped so it never leaves empty space before
-  // the start of the track (i.e. it stays left-aligned instead of centered).
+  // the start of the track
   const recomputeOffset = useCallback(() => {
     const viewport = viewportRef.current;
     const card = cardRefs.current[activeIndex];
@@ -102,57 +94,6 @@ export default function ProjectsCarousel() {
     return () => observer.disconnect();
   }, [recomputeOffset]);
 
-  const handleWheel = useCallback(
-    (event: React.WheelEvent<HTMLDivElement>) => {
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-      event.preventDefault();
-
-      wheelAccumRef.current += event.deltaY;
-
-      if (wheelResetTimeoutRef.current)
-        clearTimeout(wheelResetTimeoutRef.current);
-      wheelResetTimeoutRef.current = setTimeout(() => {
-        wheelAccumRef.current = 0;
-      }, 200);
-
-      if (wheelAccumRef.current > WHEEL_THRESHOLD) {
-        wheelAccumRef.current = 0;
-        goToIndex(activeIndex + 1);
-      } else if (wheelAccumRef.current < -WHEEL_THRESHOLD) {
-        wheelAccumRef.current = 0;
-        goToIndex(activeIndex - 1);
-      }
-    },
-    [activeIndex, goToIndex],
-  );
-
-  const handlePointerDown = useCallback((event: React.PointerEvent) => {
-    dragStartXRef.current = event.clientX;
-    setIsDragging(true);
-    (event.target as Element).setPointerCapture?.(event.pointerId);
-  }, []);
-
-  const handlePointerMove = useCallback(
-    (event: React.PointerEvent) => {
-      if (!isDragging) return;
-      setDragOffset(event.clientX - dragStartXRef.current);
-    },
-    [isDragging],
-  );
-
-  const endDrag = useCallback(() => {
-    if (!isDragging) return;
-    setIsDragging(false);
-
-    if (dragOffset > DRAG_THRESHOLD) {
-      goToIndex(activeIndex - 1);
-    } else if (dragOffset < -DRAG_THRESHOLD) {
-      goToIndex(activeIndex + 1);
-    }
-
-    setDragOffset(0);
-  }, [isDragging, dragOffset, activeIndex, goToIndex]);
-
   return (
     <section className={styles.section}>
       <div className={styles.intro}>
@@ -179,32 +120,31 @@ export default function ProjectsCarousel() {
         </Link>
       </div>
 
-      <div
-        className={styles.viewport}
-        ref={viewportRef}
-        onWheel={handleWheel}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={endDrag}
-        onPointerLeave={endDrag}
-      >
+      <div className={styles.viewport} ref={viewportRef}>
         <div
           className={styles.track}
           style={{
-            transform: `translateX(${baseOffset + dragOffset}px)`,
-            transition: isDragging ? "none" : "transform 0.45s ease",
+            transform: `translateX(${baseOffset}px)`,
+            transition: "transform 0.45s ease",
           }}
         >
+          {/* BEGIN CARD */}
           {projects.map((project, index) => (
-            <div
+            <Link
               key={project.title}
+              href={`/projects/${project.slug}`}
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
               className={`${styles.card} ${
                 index === activeIndex ? styles.cardActive : ""
               }`}
-              onClick={() => goToIndex(index)}
+              onClick={(e) => {
+                if (index !== activeIndex) {
+                  e.preventDefault();
+                  goToIndex(index);
+                }
+              }}
             >
               <div className={styles.imageWrapper}>
                 <Image
@@ -226,8 +166,9 @@ export default function ProjectsCarousel() {
 
               <h3 className={styles.cardTitle}>{project.title}</h3>
               <p className={styles.cardDescription}>{project.description}</p>
-            </div>
+            </Link>
           ))}
+          {/* END CARD */}
           <div>
             <Button>See More</Button>
           </div>

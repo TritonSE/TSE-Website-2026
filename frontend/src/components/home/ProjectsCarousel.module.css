@@ -99,7 +99,7 @@
   flex-direction: column;
 
   padding: 16px;
-  border: 3px solid #5C6269;
+  border: 3px solid #5c6269;
 
   cursor: pointer;
   user-select: none;
@@ -112,7 +112,7 @@
 }
 
 .cardActive {
-  border-color: #EBECED;
+  border-color: #ebeced;
   opacity: 1;
 }
 
@@ -172,6 +172,12 @@
   line-height: 140%;
 }
 
+@media (max-width: 1200px) {
+  .card {
+    width: 30vw;
+  }
+}
+
 @media (max-width: 900px) {
   .section {
     flex-direction: column;
@@ -189,6 +195,6 @@
   }
 
   .card {
-    width: 210px;
+    width: 60vw;
   }
 }
