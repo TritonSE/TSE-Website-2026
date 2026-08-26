@@ -9,30 +9,33 @@ const companyLogos = [
   { src: "/logos/apple.png", alt: "Apple" },
   { src: "/logos/bain.png", alt: "Bain" },
   { src: "/logos/chase.png", alt: "Chase" },
+  { src: "/logos/citadel.png", alt: "Citadel" },
+  { src: "/logos/cloudflare.png", alt: "Cloudflare" },
   { src: "/logos/coinbase.png", alt: "Coinbase" },
   { src: "/logos/databricks.png", alt: "Databricks" },
   { src: "/logos/deloitte.png", alt: "Deloitte" },
   { src: "/logos/doordash.png", alt: "DoorDash" },
-  { src: "/logos/Figma-logo.svg", alt: "Figma" },
-  { src: "/logos/Google_Favicon_2025.svg", alt: "Google" },
-  { src: "/logos/janestreet.jpg", alt: "Jane Street" },
-  {
-    src: "/logos/Meta_Platforms_Inc._logo_(cropped).svg",
-    alt: "Meta",
-  },
+  { src: "/logos/figma.png", alt: "Figma" },
+  { src: "/logos/google.png", alt: "Google" },
+  { src: "/logos/janestreet.png", alt: "Jane Street" },
+  { src: "/logos/meta.png", alt: "Meta" },
   { src: "/logos/microsoft.png", alt: "Microsoft" },
   { src: "/logos/netflix.png", alt: "Netflix" },
   { src: "/logos/nvidia.png", alt: "NVIDIA" },
-  { src: "/logos/openai.svg", alt: "OpenAI" },
+  { src: "/logos/openai.png", alt: "OpenAI" },
+  { src: "/logos/oracle.png", alt: "Oracle" },
   { src: "/logos/ramp.png", alt: "Ramp" },
   { src: "/logos/robinhood.png", alt: "Robinhood" },
-  { src: "/logos/Roblox_Logo_2025.png", alt: "Roblox" },
+  { src: "/logos/roblox.png", alt: "Roblox" },
   { src: "/logos/servicenow.png", alt: "ServiceNow" },
+  { src: "/logos/snapchat.png", alt: "Snapchat" },
   { src: "/logos/snowflake.png", alt: "Snowflake" },
+  { src: "/logos/southwest.png", alt: "Southwest" },
   { src: "/logos/spacex.png", alt: "SpaceX" },
   { src: "/logos/stripe.png", alt: "Stripe" },
   { src: "/logos/tesla.png", alt: "Tesla" },
   { src: "/logos/tiktok.png", alt: "TikTok" },
+  { src: "/logos/uber.png", alt: "Uber" },
 ];
 
 export default function CompanyCarousel() {
@@ -56,6 +59,7 @@ export default function CompanyCarousel() {
           ariaLabel="Companies our members work for"
         />
       </div>
+
       <div className={styles.carousel}>
         <LogoLoop
           logos={secondRow}
