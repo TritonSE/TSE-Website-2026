@@ -24,6 +24,7 @@
 }
 
 .navLink {
+  position: relative;
   display: inline-flex;
   height: 30px;
   align-items: center;
@@ -38,6 +39,16 @@
   line-height: normal;
   letter-spacing: 0.6px;
   text-transform: uppercase;
+}
+
+.active::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: #fffffb;
+  content: "";
 }
 
 .flipText {

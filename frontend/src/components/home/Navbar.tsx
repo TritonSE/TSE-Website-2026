@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { useState } from "react";
 
@@ -42,6 +43,7 @@ function FlipText({ children }: { children: string }) {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav className={styles.navbar}>
@@ -55,15 +57,24 @@ export default function Navbar() {
       </Link>
 
       <div className={styles.links}>
-        <Link href="/about" className={styles.navLink}>
+        <Link
+          href="/about"
+          className={`${styles.navLink} ${pathname === "/about" ? styles.active : ""}`}
+        >
           <FlipText>About</FlipText>
         </Link>
 
-        <Link href="/team" className={styles.navLink}>
+        <Link
+          href="/team"
+          className={`${styles.navLink} ${pathname === "/team" ? styles.active : ""}`}
+        >
           <FlipText>Team</FlipText>
         </Link>
 
-        <Link href="/projects" className={styles.navLink}>
+        <Link
+          href="/projects"
+          className={`${styles.navLink} ${pathname === "/projects" ? styles.active : ""}`}
+        >
           <FlipText>Projects</FlipText>
         </Link>
 
