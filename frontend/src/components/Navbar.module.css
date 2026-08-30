@@ -61,6 +61,12 @@
   left: 0;
 }
 
+/* Active-page indicator: thin underline beneath the current section's link */
+.navLinkActive {
+  border-bottom: 1px solid #fffffb;
+  padding-bottom: 3px;
+}
+
 .dropdown {
   position: relative;
 

@@ -63,44 +63,7 @@
 /* Button styling lives in Button.module.css (shared component) */
 
 .location {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
   pointer-events: auto;
-}
-
-.dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-
-  background-color: #f4b82e;
-
-  /* Blinks back and forth between accent and white (slow, WCAG-safe) */
-  animation: dotBlink 1.4s infinite;
-}
-
-.locationText {
-  color: #fffffb;
-
-  font-family: var(--font-sometype-mono);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-}
-
-@keyframes dotBlink {
-  0%,
-  49% {
-    background-color: #f4b82e;
-  }
-  50%,
-  100% {
-    background-color: #fffffb;
-  }
 }
 
 @media (max-width: 600px) {

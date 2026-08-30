@@ -1,0 +1,158 @@
+.heroSection {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+
+  background-color: #08090a;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background-image: url("/images/great-wave.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  opacity: 0.55;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.body {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+
+  padding: 0 50px 82px 50px;
+}
+
+.textAndButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.eyebrow {
+  color: #f4b82e;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.heading {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+
+  font-family: var(--font-stack-sans-notch), sans-serif;
+  font-optical-sizing: auto;
+  /* 19.84vw == the design's 300px at a 1512px viewport. Long headlines override
+     --heading-font-size with a smaller ramp so they can't run past the right
+     gutter; the max-width:900px rule below still wins for every page. */
+  font-size: var(--heading-font-size, clamp(64px, 19.84vw, 300px));
+  font-weight: 500;
+  /* The halftone crop below is positioned against this box, and the design's box
+     is 390px tall at a 300px font. Pinning the ratio keeps the crop aligned to
+     the glyphs; `normal` would let the font's own metrics shift it. */
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* Back layer: the outline. Stack Sans Notch builds its glyphs from overlapping,
+   non-unioned subpaths -- the "A" is two diagonal bars plus a crossbar bar, the
+   "b" is a stem rectangle plus a whole ellipse. Filled with nonzero winding the
+   seams are invisible, but a contrasting -webkit-text-stroke outlines *every*
+   subpath, drawing a box through the A's counter and an ellipse through the b's
+   stem. Stroking in the fill colour hides the seams and leaves a cleanly
+   dilated union silhouette; .headingFill then masks all of it but the dilation,
+   which reads as the outline (counters included). */
+.headingOutline {
+  position: absolute;
+  inset: 0;
+
+  color: #fffffb;
+  -webkit-text-stroke: 0.01em #fffffb;
+}
+
+/* Front layer: the bright halftone, clipped to the glyphs. Its gaps between the
+   dots are an opaque #070707, which is what hides the white layer behind it --
+   so this must stay fully opaque (no blend modes, no translucent fill). */
+.headingFill {
+  position: relative;
+
+  background-image: url("/images/great-wave-halftone.png");
+  background-repeat: no-repeat;
+  /* Figma: background-size 164.41% x 258.21% and position 8.51% 73.63% against a
+     918x390 box, i.e. the image drawn at 1509.3x1007 with its origin at
+     (-50, -454) under a 300px font. Expressed in em so the dot pitch tracks the
+     type at every breakpoint. */
+  background-size: 5.031em 3.357em;
+  background-position: -0.167em -1.514em;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.ctas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+.location {
+  pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .heading {
+    font-size: clamp(48px, 18vw, 200px);
+    white-space: normal;
+  }
+}
+
+@media (max-width: 600px) {
+  .body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+
+    padding: 0 24px 40px 24px;
+  }
+
+  .ctas {
+    flex-wrap: wrap;
+  }
+}
