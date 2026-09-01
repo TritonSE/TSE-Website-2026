@@ -81,6 +81,11 @@ export default function WorkWithUs() {
   const [trackTransition, setTrackTransition] = useState(true);
   const [prevActiveIndex, setPrevActiveIndex] = useState(activeIndex);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  // Which nav button triggered the in-flight transition, so only that one
+  // shows as disabled instead of both.
+  const [lastPressed, setLastPressed] = useState<"prev" | "next" | null>(
+    null,
+  );
 
   const goToIndex = (index: number) => {
     if (isTransitioning) return;
@@ -131,7 +136,10 @@ export default function WorkWithUs() {
   // Unlock input once the step's transition has had time to finish.
   useEffect(() => {
     if (!isTransitioning) return;
-    const id = setTimeout(() => setIsTransitioning(false), CARD_TRANSITION_MS);
+    const id = setTimeout(() => {
+      setIsTransitioning(false);
+      setLastPressed(null);
+    }, CARD_TRANSITION_MS);
     return () => clearTimeout(id);
   }, [isTransitioning]);
 
@@ -158,8 +166,11 @@ export default function WorkWithUs() {
             type="button"
             className={styles.navButton}
             aria-label="Previous"
-            disabled={isTransitioning}
-            onClick={() => goToIndex(activeIndex - 1)}
+            disabled={isTransitioning && lastPressed === "prev"}
+            onClick={() => {
+              setLastPressed("prev");
+              goToIndex(activeIndex - 1);
+            }}
           >
             <ChevronLeft />
           </button>
@@ -167,8 +178,11 @@ export default function WorkWithUs() {
             type="button"
             className={styles.navButton}
             aria-label="Next"
-            disabled={isTransitioning}
-            onClick={() => goToIndex(activeIndex + 1)}
+            disabled={isTransitioning && lastPressed === "next"}
+            onClick={() => {
+              setLastPressed("next");
+              goToIndex(activeIndex + 1);
+            }}
           >
             <ChevronRight />
           </button>
