@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 
 import styles from "./AboutUs.module.css";
+import PhotoRow from "./PhotoRow";
 
 // TODO(design): swap these placeholder paths for real photos.
 const rowAPhotos = [
@@ -22,28 +23,6 @@ const rowBPhotos = [
   "/images/about-us/row-b-6.jpg",
   "/images/about-us/row-b-7.jpg",
 ];
-
-type PhotoRowProps = {
-  photos: string[];
-  direction: "left" | "right";
-};
-
-function PhotoRow({ photos, direction }: PhotoRowProps) {
-  const directionClass =
-    direction === "left" ? styles.scrollLeft : styles.scrollRight;
-
-  return (
-    <div className={styles.row}>
-      <div className={`${styles.track} ${directionClass}`}>
-        {[...photos, ...photos].map((src, index) => (
-          <div className={styles.photo} key={`${src}-${index}`}>
-            <img src={src} alt="" loading="lazy" />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function AboutUs() {
   return (

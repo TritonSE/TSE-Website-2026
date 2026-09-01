@@ -4,6 +4,7 @@ import Image from "next/image";
 import Button from "@/components/Button";
 import Footer from "@/components/home/Footer";
 import Navbar from "@/components/home/Navbar";
+import PhotoRow from "@/components/home/PhotoRow";
 
 import styles from "./AboutPage.module.css";
 
@@ -50,25 +51,6 @@ function Location() {
   );
 }
 
-function TeamPhotoStrip() {
-  return (
-    <div className={styles.carousel} aria-label="TSE community photos">
-      <div className={styles.carouselTrack}>
-        {[...teamPhotos, ...teamPhotos].map((src, index) => (
-          <div className={styles.carouselPhoto} key={`${src}-${index}`}>
-            <Image
-              src={src}
-              alt="TSE members spending time together"
-              fill
-              sizes="(max-width: 700px) 220px, 223px"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function AboutPage() {
   return (
     <main className={styles.page}>
@@ -78,7 +60,9 @@ export default function AboutPage() {
 
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>Est. 2017</p>
-          <h1 className={styles.title}>About.</h1>
+          <h1 className={styles.title} data-title="About.">
+            <span className={styles.titleTexture}>About.</span>
+          </h1>
           <div className={styles.heroButtons}>
             <Button href="#mission">Our mission</Button>
             <Button href="/contact" variant="light" arrow>
@@ -171,7 +155,11 @@ export default function AboutPage() {
           </p>
           <Button href="/members">Join now</Button>
         </div>
-        <TeamPhotoStrip />
+        <PhotoRow
+          photos={teamPhotos}
+          direction="left"
+          alt="TSE members spending time together"
+        />
       </section>
 
       <Footer />

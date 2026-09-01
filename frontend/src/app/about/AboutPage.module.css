@@ -13,7 +13,7 @@
 
 .hero {
   position: relative;
-  height: 982px;
+  height: 100svh;
   background: #000;
 }
 
@@ -22,16 +22,16 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
     url("/images/great-wave.png");
   background-position: center;
   background-size: 100% 100%;
-  opacity: 0.3;
+  opacity: 0.7;
 }
 
 .heroContent {
   position: absolute;
-  top: 422px;
+  top: clamp(250px, 43vh, 422px);
   left: 50px;
   z-index: 1;
   display: flex;
@@ -51,17 +51,52 @@
 }
 
 .title {
-  margin-top: 10px;
-  background-image: url("/images/great-wave.png");
-  background-position: 8.5% 73.6%;
-  background-size: 164% 258%;
-  background-clip: text;
-  color: transparent;
+  --title-outline: clamp(1.5px, 0.14vw, 2.5px);
+
+  position: relative;
+  isolation: isolate;
+
+  margin-top: 22px;
+  color: var(--white);
   font-family: var(--font-stack-sans-notch);
   font-size: clamp(190px, 19.85vw, 300px);
   font-weight: 500;
   line-height: 0.9;
-  letter-spacing: -0.045em;
+  letter-spacing: 0em;
+}
+
+.title::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  color: var(--white);
+  content: attr(data-title);
+  pointer-events: none;
+  text-shadow:
+    var(--title-outline) 0 0 var(--white),
+    calc(var(--title-outline) * 0.707) calc(var(--title-outline) * 0.707) 0
+      var(--white),
+    0 var(--title-outline) 0 var(--white),
+    calc(var(--title-outline) * -0.707) calc(var(--title-outline) * 0.707) 0
+      var(--white),
+    calc(var(--title-outline) * -1) 0 0 var(--white),
+    calc(var(--title-outline) * -0.707) calc(var(--title-outline) * -0.707) 0
+      var(--white),
+    0 calc(var(--title-outline) * -1) 0 var(--white),
+    calc(var(--title-outline) * 0.707) calc(var(--title-outline) * -0.707) 0
+      var(--white);
+}
+
+.titleTexture {
+  position: relative;
+  z-index: 1;
+  display: block;
+  background-image: url("/images/great-wave.png");
+  background-position: center;
+  background-size: 100% 100%;
+  background-clip: text;
+  color: transparent;
+  filter: brightness(1.8) contrast(1.2);
   -webkit-background-clip: text;
 }
 
@@ -69,7 +104,7 @@
   display: flex;
   gap: 30px;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 28px;
 }
 
 .heroLocation {
@@ -292,46 +327,7 @@
   text-align: center;
 }
 
-.carousel {
-  width: 100%;
-  height: 150px;
-  overflow: hidden;
-}
-
-.carouselTrack {
-  display: flex;
-  width: max-content;
-  gap: 25px;
-  animation: marquee 42s linear infinite;
-}
-
-.carouselPhoto {
-  position: relative;
-  width: 223px;
-  height: 150px;
-  flex: 0 0 auto;
-  overflow: hidden;
-}
-
-.carouselPhoto img {
-  object-fit: cover;
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(calc(-50% - 12.5px));
-  }
-}
-
 @media (max-width: 1100px) {
-  .hero {
-    height: 820px;
-  }
-
-  .heroContent {
-    top: 330px;
-  }
-
   .title {
     font-size: clamp(140px, 20vw, 220px);
   }
@@ -352,12 +348,8 @@
 }
 
 @media (max-width: 700px) {
-  .hero {
-    height: 700px;
-  }
-
   .heroContent {
-    top: 250px;
+    top: 34%;
     right: 24px;
     left: 24px;
   }
@@ -368,13 +360,13 @@
   }
 
   .title {
-    margin-top: 20px;
+    margin-top: 24px;
     font-size: clamp(92px, 29vw, 180px);
   }
 
   .heroButtons {
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 32px;
   }
 
   .heroLocation {
@@ -450,14 +442,9 @@
   .teamSection {
     padding: 80px 0;
   }
-
-  .carouselPhoto {
-    width: 220px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .carouselTrack,
   .locationDot {
     animation: none;
   }
