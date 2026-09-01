@@ -54,8 +54,6 @@ export default function Home() {
 
       <CompanyCarousel />
 
-      <WorkWithUs />
-
       <section
         style={{
           minHeight: "100vh",
@@ -70,6 +68,8 @@ export default function Home() {
         <ImpactStats />
 
         <AboutUs />
+
+        <WorkWithUs />
 
         <Footer />
       </section>

@@ -40,7 +40,7 @@ const cards: WorkWithUsCard[] = [
     label: "MEMBERS",
     image: "/images/dial/dial-1.png",
     description:
-      "Interested in joining TSE as a designer or developer? Our applications open in mid-October every Fall quarter. Connect with us at our info sessions and many other recruiting events every year.",
+      "Interested in joining TSE as a designer or developer? Our applications open in mid-September every Fall quarter. Connect with us at our info sessions and many other recruiting events every year.",
     primary: { label: "View All Projects", href: "/projects" },
     secondary: { label: "Apply", href: "/apply" },
   },
