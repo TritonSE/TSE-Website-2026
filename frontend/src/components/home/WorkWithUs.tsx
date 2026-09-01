@@ -99,8 +99,8 @@ export default function WorkWithUs() {
     recomputeOffset();
   }, [recomputeOffset]);
 
-if (activeIndex !== prevActiveIndex) {
-    const direction = 
+  if (activeIndex !== prevActiveIndex) {
+    const direction =
       (((activeIndex - prevActiveIndex) % cards.length) + cards.length) %
       cards.length;
     setPrevActiveIndex(activeIndex);
