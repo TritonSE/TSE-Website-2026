@@ -6,6 +6,7 @@ import QuoteReveal from "@/components/home/QuoteReveal";
 import CompanyCarousel from "@/components/home/CompanyCarousel";
 import AboutUs from "@/components/home/AboutUs";
 import ProjectsCarousel from "@/components/home/ProjectsCarousel";
+import WorkWithUs from "@/components/home/WorkWithUs";
 
 export default function Home() {
   return (
@@ -67,6 +68,8 @@ export default function Home() {
         <ImpactStats />
 
         <AboutUs />
+
+        <WorkWithUs />
 
         <Footer />
       </section>
