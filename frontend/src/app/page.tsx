@@ -1,9 +1,12 @@
 import Footer from "@/components/home/Footer";
 import ImpactStats from "@/components/home/ImpactStats";
+import Hero from "@/components/Hero";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
 import CompanyCarousel from "@/components/home/CompanyCarousel";
 import PeopleSection from "@/components/home/PeopleSection";
+import AboutUs from "@/components/home/AboutUs";
+import ProjectsCarousel from "@/components/home/ProjectsCarousel";
 
 export default function Home() {
   return (
@@ -42,10 +45,12 @@ export default function Home() {
           }}
         >
           <Navbar />
+          <Hero />
         </section>
       </div>
 
       {/* Everything after the quote is normal page flow */}
+      <ProjectsCarousel />
 
       <CompanyCarousel />
 
@@ -60,8 +65,10 @@ export default function Home() {
           fontSize: "48px",
         }}
       >
-        <ImpactStats />
+        <ImpactStats />        
+        <AboutUs />
         <PeopleSection />
+
         <Footer />
       </section>
     </main>

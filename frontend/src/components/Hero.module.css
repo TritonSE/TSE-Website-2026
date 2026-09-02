@@ -1,0 +1,123 @@
+.hero {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+
+  padding: 0 50px 56px 50px;
+
+  /* Let clicks fall through everywhere except the interactive children */
+  pointer-events: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.eyebrow {
+  color: #f4b82e;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.heading {
+  max-width: 540px;
+
+  color: #fffffb;
+
+  font-family: var(--font-stack-sans-notch), sans-serif;
+  font-optical-sizing: auto;
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.ctas {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+
+  margin-top: 8px;
+}
+
+/* Button styling lives in Button.module.css (shared component) */
+
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  pointer-events: auto;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+
+  background-color: #f4b82e;
+
+  /* Blinks back and forth between accent and white (slow, WCAG-safe) */
+  animation: dotBlink 1.4s infinite;
+}
+
+.locationText {
+  color: #fffffb;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+@keyframes dotBlink {
+  0%,
+  49% {
+    background-color: #f4b82e;
+  }
+  50%,
+  100% {
+    background-color: #fffffb;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+
+    padding: 0 24px 40px 24px;
+  }
+
+  .heading {
+    font-size: 38px;
+    line-height: 1.2;
+  }
+
+  .ctas {
+    flex-wrap: wrap;
+  }
+}
