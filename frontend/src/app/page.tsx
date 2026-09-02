@@ -65,7 +65,7 @@ export default function Home() {
           fontSize: "48px",
         }}
       >
-        <ImpactStats />        
+        <ImpactStats />
         <AboutUs />
         <PeopleSection />
 
