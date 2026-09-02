@@ -1,7 +1,7 @@
 .option-wheel {
   --ow-text-color: #a6a6a6;
   --ow-active-color: #ffffff;
-  --ow-font-size: 3rem;
+  --ow-font-size: 20px;
   --ow-inset: 80px;
 
   position: relative;
