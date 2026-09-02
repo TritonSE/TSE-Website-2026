@@ -3,6 +3,7 @@ import ImpactStats from "@/components/home/ImpactStats";
 import Navbar from "@/components/home/Navbar";
 import QuoteReveal from "@/components/home/QuoteReveal";
 import CompanyCarousel from "@/components/home/CompanyCarousel";
+import PeopleSection from "@/components/home/PeopleSection";
 
 export default function Home() {
   return (
@@ -60,6 +61,7 @@ export default function Home() {
         }}
       >
         <ImpactStats />
+        <PeopleSection />
         <Footer />
       </section>
     </main>
