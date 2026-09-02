@@ -83,9 +83,7 @@ export default function WorkWithUs() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   // Which nav button triggered the in-flight transition, so only that one
   // shows as disabled instead of both.
-  const [lastPressed, setLastPressed] = useState<"prev" | "next" | null>(
-    null,
-  );
+  const [lastPressed, setLastPressed] = useState<"prev" | "next" | null>(null);
 
   const goToIndex = (index: number) => {
     if (isTransitioning) return;
