@@ -131,7 +131,13 @@ export default function PeopleGrid({ members }: PeopleGridProps) {
               className={styles.memberImage}
               style={{
                 objectPosition:
-                  member.name === "Alice Guo" || member.name === "Jaden Huang"
+                  member.name === "Alice Guo" ||
+                  member.name === "Jaden Huang" ||
+                  member.name === "Ishayu Ghosh" ||
+                  member.name === "Kate Songpetchmongkol" ||
+                  member.name === "Kalyssa Choy" ||
+                  member.name === "Alice Park" ||
+                  member.name === "Juee Deshmukh"
                     ? "center 45%"
                     : member.name === "Joyce Ren"
                       ? "center 25%"
