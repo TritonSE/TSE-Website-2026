@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import Button from "@/components/Button";
+import PhotoRow from "@/components/PhotoRow";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 
@@ -47,25 +48,6 @@ function Location() {
       <span className={styles.locationDot} aria-hidden="true" />
       San Diego, CA
     </p>
-  );
-}
-
-function TeamPhotoStrip() {
-  return (
-    <div className={styles.carousel} aria-label="TSE community photos">
-      <div className={styles.carouselTrack}>
-        {[...teamPhotos, ...teamPhotos].map((src, index) => (
-          <div className={styles.carouselPhoto} key={`${src}-${index}`}>
-            <Image
-              src={src}
-              alt="TSE members spending time together"
-              fill
-              sizes="(max-width: 700px) 220px, 223px"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -171,7 +153,11 @@ export default function AboutPage() {
           </p>
           <Button href="/members">Join now</Button>
         </div>
-        <TeamPhotoStrip />
+        <PhotoRow
+          photos={teamPhotos}
+          direction="left"
+          alt="TSE members spending time together"
+        />
       </section>
 
       <Footer />
