@@ -88,6 +88,26 @@ const positions: Position[] = [
   { column: 10, row: 5 },
 ];
 
+const rowOffsets: Record<number, number> = {
+  1: 0,
+  2: -12,
+  3: 8,
+  4: -6,
+  5: 36,
+};
+
+function getObjectPosition(name: string) {
+  if (name === "Alice Guo" || name === "Jaden Huang") {
+    return "center 45%";
+  }
+
+  if (name === "Joyce Ren") {
+    return "center 35%";
+  }
+
+  return "center top";
+}
+
 export default function PeopleGrid({ members }: PeopleGridProps) {
   const [cursor, setCursor] = useState<CursorState | null>(null);
 
@@ -118,30 +138,24 @@ export default function PeopleGrid({ members }: PeopleGridProps) {
             style={{
               gridColumn: position.column,
               gridRow: position.row,
+              translate: `${rowOffsets[position.row]}px 0`,
             }}
-            onPointerEnter={(event) => handlePointerMove(event, member.name)}
-            onPointerMove={(event) => handlePointerMove(event, member.name)}
+            onPointerEnter={(event) =>
+              handlePointerMove(event, member.name)
+            }
+            onPointerMove={(event) =>
+              handlePointerMove(event, member.name)
+            }
             onPointerLeave={() => setCursor(null)}
           >
             <Image
               src={member.src}
               alt={member.name}
               fill
-              sizes="100px"
+              sizes="80px"
               className={styles.memberImage}
               style={{
-                objectPosition:
-                  member.name === "Alice Guo" ||
-                  member.name === "Jaden Huang" ||
-                  member.name === "Ishayu Ghosh" ||
-                  member.name === "Kate Songpetchmongkol" ||
-                  member.name === "Kalyssa Choy" ||
-                  member.name === "Alice Park" ||
-                  member.name === "Juee Deshmukh"
-                    ? "center 45%"
-                    : member.name === "Joyce Ren"
-                      ? "center 25%"
-                      : "center top",
+                objectPosition: getObjectPosition(member.name),
               }}
             />
           </div>
