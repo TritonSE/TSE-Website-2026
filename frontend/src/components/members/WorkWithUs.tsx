@@ -14,9 +14,10 @@ export default function WorkWithUs() {
         startRadius={0}
         endRadius={0}
         mediaZoom={1}
-        stageHeight={50}
-        stickyTop={25}
-        scrollDistance={2}
+        mediaPosition="center 67%"
+        stageHeight={62.5}
+        stickyTop={18.75}
+        scrollDistance={1.6}
         holdDistance={0}
         smoothing={0.1}
         overlayScrim={0}

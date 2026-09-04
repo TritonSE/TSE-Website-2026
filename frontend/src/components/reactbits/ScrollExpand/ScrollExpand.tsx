@@ -55,6 +55,7 @@ type ScrollExpandProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
   startRadius?: number;
   endRadius?: number;
   mediaZoom?: number;
+  mediaPosition?: CSSProperties["objectPosition"];
   stageHeight?: number;
   stickyTop?: number;
   scrollDistance?: number;
@@ -83,6 +84,7 @@ export default function ScrollExpand({
   startRadius = 24,
   endRadius = 0,
   mediaZoom = 1.35,
+  mediaPosition = "center",
   stageHeight = 100,
   stickyTop = 0,
   scrollDistance = 1.2,
@@ -369,13 +371,16 @@ export default function ScrollExpand({
       <video
         ref={mediaRef as RefObject<HTMLVideoElement | null>}
         className={styles.media}
-        style={{ transform: `scale(${mediaZoom})` }}
         src={src}
         poster={poster}
         autoPlay
         muted
         loop
         playsInline
+        style={{
+          objectPosition: mediaPosition,
+          transform: `scale(${mediaZoom})`,
+        }}
       />
     ) : (
       <Image
@@ -386,7 +391,10 @@ export default function ScrollExpand({
         fill
         sizes={imageSizes}
         preload={preload}
-        style={{ transform: `scale(${mediaZoom})` }}
+        style={{
+          objectPosition: mediaPosition,
+          transform: `scale(${mediaZoom})`,
+        }}
         draggable={false}
       />
     );

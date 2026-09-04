@@ -36,6 +36,7 @@
 
 .missionCopy {
   grid-column: 3;
+  padding-top: 65px;
   text-align: right;
 }
 
