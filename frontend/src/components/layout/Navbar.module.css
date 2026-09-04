@@ -1,0 +1,149 @@
+.navbar {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  right: 50px;
+  z-index: 10;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  width: 21px;
+  height: 29px;
+}
+
+.links {
+  display: inline-flex;
+  height: 160px;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.navLink {
+  display: inline-flex;
+  height: 30px;
+  align-items: center;
+
+  color: #fffffb;
+  text-decoration: none;
+  text-align: center;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.flipText {
+  position: relative;
+
+  display: inline-block;
+  height: 24px;
+
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.flipTextTop,
+.flipTextBottom {
+  display: block;
+}
+
+.flipTextBottom {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.dropdown {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.dropdownButton {
+  display: inline-flex;
+  height: 30px;
+  align-items: center;
+  gap: 12px;
+
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  color: #fffffb;
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.chevron {
+  flex-shrink: 0;
+
+  transition: transform 0.4s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropdownItem {
+  display: flex;
+  width: 146px;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  border: 1px solid #85898e;
+
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  color: #85898e;
+  text-decoration: none;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+
+  transition:
+    color 0.4s ease-in,
+    border-color 0.4s ease-in,
+    background 0.4s ease-in;
+}
+
+.dropdownItem:hover {
+  border-color: #fffffb;
+  color: #fffffb;
+}

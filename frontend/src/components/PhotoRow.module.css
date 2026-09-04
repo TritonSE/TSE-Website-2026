@@ -1,0 +1,63 @@
+.row {
+  width: 100%;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  gap: 30px;
+}
+
+.scrollLeft {
+  animation: scroll-left 30s linear infinite;
+}
+
+.scrollRight {
+  animation: scroll-right 30s linear infinite;
+}
+
+.photo {
+  position: relative;
+  width: 395px;
+  height: 266px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  background: #1a1b1d;
+}
+
+.photo img {
+  object-fit: cover;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes scroll-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollLeft,
+  .scrollRight {
+    animation: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .photo {
+    width: 260px;
+    height: 175px;
+  }
+}
