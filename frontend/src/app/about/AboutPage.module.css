@@ -304,6 +304,11 @@
   font-size: 20px;
   font-weight: 400;
   line-height: 1.25;
+  transition: color 350ms ease;
+}
+
+.valuesList p.valueDescriptionActive {
+  color: var(--white);
 }
 
 .teamSection {

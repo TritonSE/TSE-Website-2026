@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 
 import styles from "./AboutPage.module.css";
+import ScrollColorText from "./ScrollColorText";
 
 export const metadata: Metadata = {
   title: "About | Triton Software Engineering",
@@ -127,7 +128,12 @@ export default function AboutPage() {
             {values.map((value) => (
               <li key={value.title}>
                 <h2>{value.title}</h2>
-                <p>{value.description}</p>
+                <ScrollColorText
+                  className={styles.valueDescription}
+                  activeClassName={styles.valueDescriptionActive}
+                >
+                  {value.description}
+                </ScrollColorText>
               </li>
             ))}
           </ol>
