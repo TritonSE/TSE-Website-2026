@@ -60,7 +60,9 @@ export default function AboutPage() {
 
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>Est. 2017</p>
-          <h1 className={styles.title}>About.</h1>
+          <h1 className={styles.title} data-title="About.">
+            <span className={styles.titleTexture}>About.</span>
+          </h1>
           <div className={styles.heroButtons}>
             <Button href="#mission">Our mission</Button>
             <Button href="/contact" variant="light" arrow>
