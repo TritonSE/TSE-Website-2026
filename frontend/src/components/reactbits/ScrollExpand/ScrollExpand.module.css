@@ -4,6 +4,12 @@
   background: #08090a;
 }
 
+.windowScroll::after {
+  display: block;
+  height: var(--scroll-expand-exit-space, 0);
+  content: "";
+}
+
 .scroller {
   height: 100%;
   overflow-x: hidden;
@@ -34,9 +40,10 @@
 .frame {
   position: absolute;
   z-index: 1;
-  inset: 21% 29%;
+  inset: 0;
   overflow: hidden;
-  will-change: inset, border-radius;
+  clip-path: inset(21% 29% round 24px);
+  will-change: clip-path;
 }
 
 .media {
@@ -121,6 +128,19 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .windowScroll::after {
+    display: none;
+  }
+
+  .track {
+    height: auto !important;
+  }
+
+  .stage {
+    position: relative;
+    top: 0 !important;
+  }
+
   .frame,
   .media,
   .overlay,

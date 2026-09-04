@@ -40,8 +40,6 @@ type ScrollExpandConfig = {
   overlayScrim: number;
   useWindowScroll: boolean;
   enabled: boolean;
-  imageSizes: string;
-  expandedImageSizes: string;
 };
 
 type ScrollExpandProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
@@ -57,6 +55,8 @@ type ScrollExpandProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
   startRadius?: number;
   endRadius?: number;
   mediaZoom?: number;
+  stageHeight?: number;
+  stickyTop?: number;
   scrollDistance?: number;
   holdDistance?: number;
   smoothing?: number;
@@ -65,7 +65,6 @@ type ScrollExpandProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
   enabled?: boolean;
   preload?: boolean;
   imageSizes?: string;
-  expandedImageSizes?: string;
   children?: ReactNode;
   persistentOverlay?: ReactNode;
   style?: CSSProperties;
@@ -84,6 +83,8 @@ export default function ScrollExpand({
   startRadius = 24,
   endRadius = 0,
   mediaZoom = 1.35,
+  stageHeight = 100,
+  stickyTop = 0,
   scrollDistance = 1.2,
   holdDistance = 0.35,
   smoothing = 0.1,
@@ -91,8 +92,7 @@ export default function ScrollExpand({
   useWindowScroll = false,
   enabled = true,
   preload = false,
-  imageSizes,
-  expandedImageSizes = "100vw",
+  imageSizes = "100vw",
   children,
   persistentOverlay,
   className = "",
@@ -104,10 +104,21 @@ export default function ScrollExpand({
   const restingHorizontalInset = minStartWidth
     ? `max(0px, calc((100% - max(${restingWidth}%, ${Math.max(0, minStartWidth)}px)) / 2))`
     : `${(100 - restingWidth) / 2}%`;
-  const restingInset = `${(100 - restingHeight) / 2}% ${restingHorizontalInset}`;
-  const restingImageSizes = imageSizes ?? `${restingWidth}vw`;
+  const restingClipPath = `inset(${(100 - restingHeight) / 2}% ${restingHorizontalInset} round ${startRadius}px)`;
+  const scrollUnit = useWindowScroll ? "svh" : "%";
   const trackLength =
-    100 * (1 + Math.max(0, scrollDistance) + Math.max(0, holdDistance));
+    stageHeight * (1 + Math.max(0, scrollDistance) + Math.max(0, holdDistance));
+  const rootStyle = {
+    ...style,
+    ...(useWindowScroll
+      ? {
+          "--scroll-expand-exit-space": `${Math.max(
+            0,
+            100 - stageHeight - stickyTop,
+          )}svh`,
+        }
+      : {}),
+  } as CSSProperties;
 
   const rootRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -133,8 +144,6 @@ export default function ScrollExpand({
     overlayScrim,
     useWindowScroll,
     enabled,
-    imageSizes: restingImageSizes,
-    expandedImageSizes,
   });
 
   const applyProgress = useCallback((progress: number) => {
@@ -156,16 +165,8 @@ export default function ScrollExpand({
       config.startRadius +
       (config.endRadius - config.startRadius) * easedProgress;
 
-    frame.style.inset = `${verticalInset}% ${horizontalInset}%`;
-    frame.style.borderRadius = `${radius}px`;
+    frame.style.clipPath = `inset(${verticalInset}% ${horizontalInset}% round ${radius}px)`;
     media.style.transform = `scale(${config.mediaZoom + (1 - config.mediaZoom) * easedProgress})`;
-
-    if (media instanceof HTMLImageElement) {
-      const nextSizes =
-        progress > 0.05 ? config.expandedImageSizes : config.imageSizes;
-
-      if (media.sizes !== nextSizes) media.sizes = nextSizes;
-    }
 
     if (scrimRef.current) {
       scrimRef.current.style.opacity = `${config.overlayScrim * easedProgress}`;
@@ -204,13 +205,10 @@ export default function ScrollExpand({
       overlayScrim,
       useWindowScroll,
       enabled,
-      imageSizes: restingImageSizes,
-      expandedImageSizes,
     });
   }, [
     enabled,
     endRadius,
-    expandedImageSizes,
     holdDistance,
     mediaZoom,
     minStartWidth,
@@ -220,7 +218,6 @@ export default function ScrollExpand({
     startHeight,
     startRadius,
     startWidth,
-    restingImageSizes,
     useWindowScroll,
   ]);
 
@@ -237,24 +234,38 @@ export default function ScrollExpand({
     let animationFrame = 0;
     let current = 0;
     let target = 0;
-    let stageHeight = 0;
+    let stageHeightPixels = 0;
+    let stickyOffset = 0;
+    let pinStart = 0;
     let running = false;
 
     const measure = () => {
       const config = configRef.current;
       const stageRect = stage.getBoundingClientRect();
-      stageHeight = stageRect.height;
+      stageHeightPixels = stageRect.height;
+      stickyOffset = Number.parseFloat(window.getComputedStyle(stage).top) || 0;
 
-      if (stageHeight <= 0) return;
+      if (stageHeightPixels <= 0) return;
 
+      const trackRect = track.getBoundingClientRect();
+      const trackStart = config.useWindowScroll
+        ? trackRect.top + window.scrollY
+        : 0;
+      const earlyPinCompensation = config.useWindowScroll
+        ? Math.max(0, stickyOffset - trackStart)
+        : 0;
       const scrollLength =
-        stageHeight *
-        (1 +
-          Math.max(0, config.scrollDistance) +
-          Math.max(0, config.holdDistance));
+        stageHeightPixels *
+          (1 +
+            Math.max(0, config.scrollDistance) +
+            Math.max(0, config.holdDistance)) +
+        earlyPinCompensation;
       track.style.height = `${scrollLength}px`;
+      pinStart = config.useWindowScroll
+        ? Math.max(0, trackStart - stickyOffset)
+        : 0;
 
-      const stageWidth = stageRect.width || stageHeight;
+      const stageWidth = stageRect.width || stageHeightPixels;
       const minimumWidthPercent = config.minStartWidth
         ? (config.minStartWidth / stageWidth) * 100
         : 0;
@@ -274,10 +285,11 @@ export default function ScrollExpand({
 
       if (reduceMotion || !config.enabled) return 1;
 
-      const scrollSpan = stageHeight * Math.max(0.01, config.scrollDistance);
+      const scrollSpan =
+        stageHeightPixels * Math.max(0.01, config.scrollDistance);
 
       if (config.useWindowScroll) {
-        return clamp(-track.getBoundingClientRect().top / scrollSpan, 0, 1);
+        return clamp((window.scrollY - pinStart) / scrollSpan, 0, 1);
       }
 
       return clamp(root.scrollTop / scrollSpan, 0, 1);
@@ -341,7 +353,16 @@ export default function ScrollExpand({
       window.removeEventListener("resize", onResize);
       resizeObserver.disconnect();
     };
-  }, [applyProgress, useWindowScroll]);
+  }, [
+    applyProgress,
+    holdDistance,
+    minStartWidth,
+    scrollDistance,
+    stageHeight,
+    startWidth,
+    stickyTop,
+    useWindowScroll,
+  ]);
 
   const media =
     mediaType === "video" ? (
@@ -363,7 +384,7 @@ export default function ScrollExpand({
         src={src}
         alt={alt}
         fill
-        sizes={restingImageSizes}
+        sizes={imageSizes}
         preload={preload}
         style={{ transform: `scale(${mediaZoom})` }}
         draggable={false}
@@ -373,24 +394,30 @@ export default function ScrollExpand({
   return (
     <div
       ref={rootRef}
-      className={`${styles.root} ${useWindowScroll ? "" : styles.scroller} ${className}`.trim()}
-      style={style}
+      className={`${styles.root} ${useWindowScroll ? styles.windowScroll : styles.scroller} ${className}`.trim()}
+      style={rootStyle}
       {...rest}
     >
       <div
         ref={trackRef}
         className={styles.track}
         style={{
-          height: `${trackLength}${useWindowScroll ? "svh" : "%"}`,
+          height: `${trackLength}${scrollUnit}`,
         }}
       >
-        <div ref={stageRef} className={styles.stage}>
+        <div
+          ref={stageRef}
+          className={styles.stage}
+          style={{
+            height: `${stageHeight}${scrollUnit}`,
+            top: `${stickyTop}${scrollUnit}`,
+          }}
+        >
           <div
             ref={frameRef}
             className={styles.frame}
             style={{
-              inset: restingInset,
-              borderRadius: `${startRadius}px`,
+              clipPath: restingClipPath,
             }}
           >
             {media}

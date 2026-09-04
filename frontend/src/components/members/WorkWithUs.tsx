@@ -8,19 +8,20 @@ export default function WorkWithUs() {
       <ScrollExpand
         src="/images/members/work-with-us.jpg"
         alt="Triton Software Engineering members gathered in Joshua Tree"
-        startWidth={32.9167}
+        startWidth={31.3492}
         minStartWidth={320}
         startHeight={100}
         startRadius={0}
         endRadius={0}
         mediaZoom={1}
-        scrollDistance={1.2}
-        holdDistance={0.35}
+        stageHeight={50}
+        stickyTop={25}
+        scrollDistance={2}
+        holdDistance={0}
         smoothing={0.1}
         overlayScrim={0}
         useWindowScroll
         preload
-        imageSizes="(max-width: 600px) 320px, 33vw"
         persistentOverlay={
           <div className={styles.copyLayout}>
             <div className={`${styles.copyBlock} ${styles.introCopy}`}>
