@@ -1,6 +1,9 @@
 "use client";
 
+import { useState, type PointerEvent } from "react";
+
 import LogoLoop from "@/components/reactbits/LogoLoop/LogoLoop";
+import NameTag from "./NameTag";
 import styles from "./CompanyCarousel.module.css";
 
 const companyLogos = [
@@ -38,41 +41,102 @@ const companyLogos = [
   { src: "/logos/uber.png", alt: "Uber" },
 ];
 
+interface CursorState {
+  name: string;
+  x: number;
+  y: number;
+}
+
 export default function CompanyCarousel() {
   const firstRow = companyLogos.filter((_, index) => index % 2 === 0);
   const secondRow = companyLogos.filter((_, index) => index % 2 === 1);
+
+  const [cursor, setCursor] = useState<CursorState | null>(null);
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    const target = event.target;
+
+    if (!(target instanceof Element)) {
+      setCursor(null);
+      return;
+    }
+
+    const logoItem = target.closest(".logoloop__item");
+
+    if (!logoItem) {
+      setCursor(null);
+      return;
+    }
+
+    const image = logoItem.querySelector("img");
+
+    if (!image) {
+      setCursor(null);
+      return;
+    }
+
+    setCursor({
+      name: image.alt,
+      x: event.clientX,
+      y: event.clientY,
+    });
+  };
+
+  const handlePointerLeave = () => {
+    setCursor(null);
+  };
 
   return (
     <section className={styles.section}>
       <h2 className={styles.title}>Our members work at...</h2>
 
-      <div className={styles.carousel}>
+      <div
+        className={styles.carousel}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+      >
         <LogoLoop
           logos={firstRow}
           speed={100}
           direction="left"
           logoHeight={60}
           gap={120}
-          pauseOnHover={false}
+          pauseOnHover={true}
           fadeOut={false}
           scaleOnHover={false}
           ariaLabel="Companies our members work for"
         />
       </div>
 
-      <div className={styles.carousel}>
+      <div
+        className={styles.carousel}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+      >
         <LogoLoop
           logos={secondRow}
           speed={100}
           direction="right"
           logoHeight={60}
           gap={120}
-          pauseOnHover={false}
+          pauseOnHover={true}
           fadeOut={false}
           scaleOnHover={false}
           ariaLabel="Companies our members work for"
         />
       </div>
+
+      {cursor && (
+        <div
+          className={styles.nameCursor}
+          style={{
+            left: cursor.x,
+            top: cursor.y,
+          }}
+        >
+          <NameTag name={cursor.name} />
+        </div>
+      )}
     </section>
   );
 }

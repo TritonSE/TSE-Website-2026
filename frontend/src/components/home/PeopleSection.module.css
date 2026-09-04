@@ -1,0 +1,174 @@
+.section {
+  display: grid;
+  width: 100%;
+  min-height: 700px;
+
+  grid-template-columns: minmax(0, 2fr) minmax(340px, 0.9fr);
+  align-items: center;
+  gap: 64px;
+
+  padding: 120px 64px;
+
+  overflow: hidden;
+
+  background: #08090a;
+}
+
+.mosaic {
+  display: grid;
+
+  grid-template-columns: repeat(12, 80px);
+  grid-template-rows: repeat(5, 80px);
+
+  gap: 10px;
+}
+
+.memberCard {
+  position: relative;
+
+  width: 80px;
+  height: 80px;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+
+  transition: transform 0.2s ease;
+  transform-origin: center;
+  z-index: 1;
+}
+
+.memberCard:hover {
+  transform: scale(1.15);
+  z-index: 2;
+}
+
+.memberImage {
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  max-width: 520px;
+
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 30px;
+}
+
+.title {
+  margin: 0;
+
+  color: var(--White, #fffffb);
+
+  font-family: var(--font-stack-sans-notch), "Stack Sans Notch", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.title span {
+  color: var(--Gold, #f4b82e);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  color: var(--Gray10, #ebeced);
+
+  font-family: var(--font-stack-sans-text), "Stack Sans Text", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%;
+}
+
+.copy p {
+  margin: 0;
+}
+
+.joinButton {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px 24px;
+
+  border: 2px solid #fffffb;
+
+  color: #fffffb;
+  background: transparent;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.joinButton:hover {
+  color: #08090a;
+  background: #fffffb;
+}
+
+.nameCursor {
+  position: fixed;
+  z-index: 9999;
+
+  pointer-events: none;
+
+  transform: translate(16px, 8px);
+}
+
+@media (max-width: 1100px) {
+  .section {
+    grid-template-columns: 1fr;
+
+    gap: 80px;
+
+    padding: 100px 40px;
+  }
+
+  .content {
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding: 80px 20px;
+  }
+
+  .mosaic {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: 90px;
+  }
+
+  .memberCard {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .memberCard:nth-child(n + 26) {
+    display: none;
+  }
+
+  .content {
+    gap: 24px;
+  }
+
+  .copy {
+    font-size: 18px;
+  }
+}
