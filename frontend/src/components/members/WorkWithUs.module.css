@@ -1,0 +1,78 @@
+.section {
+  width: 100%;
+  min-height: 100svh;
+  background: #08090a;
+}
+
+.copyLayout {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: minmax(0, 346px) 1fr minmax(0, 346px);
+  gap: 37px;
+  padding: 100px 100px 48px;
+}
+
+.copyBlock {
+  position: relative;
+  color: #fffffb;
+  font-family: var(--font-stack-sans-text);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.introCopy {
+  grid-column: 1;
+}
+
+.introCopy h1 {
+  margin-bottom: 25px;
+  font-family: var(--font-stack-sans-notch);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.missionCopy {
+  grid-column: 3;
+  padding-top: 75px;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .copyLayout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 48px;
+    padding: 112px 24px 48px;
+  }
+
+  .missionCopy {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .copyLayout {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 48px;
+    padding: 112px 24px 56px;
+  }
+
+  .copyBlock {
+    max-width: 320px;
+    font-size: 18px;
+  }
+
+  .introCopy h1 {
+    margin-bottom: 18px;
+    font-size: 28px;
+  }
+
+  .missionCopy {
+    align-self: flex-end;
+    padding-top: 0;
+  }
+}
