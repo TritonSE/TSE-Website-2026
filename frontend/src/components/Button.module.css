@@ -1,0 +1,86 @@
+.button {
+  position: relative;
+  overflow: hidden;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  color: #fffffb;
+  text-decoration: none;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  pointer-events: auto;
+
+  transition:
+    background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- dark: frosted glass by default -> solid black on hover ---- */
+.dark {
+  /* Frosted glass: faint tint + blur whatever sits behind the box */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(4px);
+
+  color: #85898e;
+}
+
+/* ---- light: solid light button that darkens slightly on hover ---- */
+.light {
+  background: #fffffb;
+  border-color: rgba(0, 0, 0, 0.12);
+
+  color: #0a0a0a;
+}
+
+/* ---- chevron icon ----
+   Chevron sits at a fixed slot and slides right on hover. */
+.icon {
+  display: inline-flex;
+  align-items: center;
+
+  height: 12px;
+  margin-left: 10px;
+}
+
+.chevron {
+  display: block;
+
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dark:hover {
+    /* Keep the blur through the fade; the opaque black hides it once filled.
+       Removing it here caused a flicker (blur vanished before bg darkened). */
+    background: #000;
+
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  .light:hover {
+    background: #d9d9d3;
+  }
+
+  .button:hover .chevron {
+    transform: translateX(6px);
+  }
+}
