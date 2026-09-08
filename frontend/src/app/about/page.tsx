@@ -127,8 +127,8 @@ export default function AboutPage() {
           <ol className={styles.valuesList}>
             {values.map((value) => (
               <li key={value.title}>
-                <h2>{value.title}</h2>
                 <ScrollColorText
+                  title={value.title}
                   className={styles.valueDescription}
                   activeClassName={styles.valueDescriptionActive}
                 >

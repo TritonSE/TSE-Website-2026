@@ -5,16 +5,18 @@ import type { ReactNode } from "react";
 
 type ScrollColorTextProps = {
   children: ReactNode;
+  title: string;
   className: string;
   activeClassName: string;
 };
 
 export default function ScrollColorText({
   children,
+  title,
   className,
   activeClassName,
 }: ScrollColorTextProps) {
-  const textRef = useRef<HTMLParagraphElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const [hasPassedViewportCenter, setHasPassedViewportCenter] = useState(false);
 
   useEffect(() => {
@@ -23,10 +25,10 @@ export default function ScrollColorText({
     const updateColor = () => {
       frameId = undefined;
 
-      const text = textRef.current;
-      if (!text) return;
+      const title = titleRef.current;
+      if (!title) return;
 
-      const { top, height } = text.getBoundingClientRect();
+      const { top, height } = title.getBoundingClientRect();
       setHasPassedViewportCenter(top + height / 2 <= window.innerHeight / 2);
     };
 
@@ -48,13 +50,15 @@ export default function ScrollColorText({
   }, []);
 
   return (
-    <p
-      ref={textRef}
-      className={`${className} ${
-        hasPassedViewportCenter ? activeClassName : ""
-      }`}
-    >
-      {children}
-    </p>
+    <>
+      <h2 ref={titleRef}>{title}</h2>
+      <p
+        className={`${className} ${
+          hasPassedViewportCenter ? activeClassName : ""
+        }`}
+      >
+        {children}
+      </p>
+    </>
   );
 }
