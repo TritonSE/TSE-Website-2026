@@ -112,6 +112,9 @@ export default function ScrollExpand({
     stageHeight * (1 + Math.max(0, scrollDistance) + Math.max(0, holdDistance));
   const rootStyle = {
     ...style,
+    "--scroll-expand-resting-width": minStartWidth
+      ? `max(${restingWidth}%, ${Math.max(0, minStartWidth)}px)`
+      : `${restingWidth}%`,
     ...(useWindowScroll
       ? {
           "--scroll-expand-exit-space": `${Math.max(

@@ -7,14 +7,19 @@
   display: grid;
   width: 100%;
   height: 100%;
-  grid-template-columns: minmax(0, 346px) minmax(320px, 474px) minmax(0, 346px);
-  gap: clamp(37px, 4.83vw, 73px);
-  justify-content: center;
-  padding: clamp(32px, 9.92svh, 100px) clamp(24px, 6.61vw, 100px) 32px;
+  grid-template-columns:
+    minmax(0, 1fr) var(--scroll-expand-resting-width, 31.3492%)
+    minmax(0, 1fr);
+  padding: clamp(32px, 9.92svh, 100px) 0 32px;
 }
 
 .copyBlock {
   position: relative;
+  width: min(
+    346px,
+    calc(100% - clamp(48px, 7vw, 87px) - clamp(48px, 7vw, 87px))
+  );
+  justify-self: center;
   color: #fffffb;
   font-family: var(--font-stack-sans-text);
   font-size: 20px;
@@ -45,6 +50,11 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 48px;
     padding: 48px 24px 32px;
+  }
+
+  .copyBlock {
+    width: auto;
+    justify-self: stretch;
   }
 
   .missionCopy {
