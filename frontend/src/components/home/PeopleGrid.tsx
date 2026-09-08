@@ -90,18 +90,25 @@ const positions: Position[] = [
 
 const rowOffsets: Record<number, number> = {
   1: 0,
-  2: -12,
-  3: 8,
-  4: -6,
-  5: 36,
+  2: -0.15,
+  3: 0.1,
+  4: -0.075,
+  5: 0.45,
 };
 
 function getObjectPosition(name: string) {
-  if (name === "Alice Guo" || name === "Jaden Huang") {
+  if (
+    name === "Alice Guo" ||
+    name === "Jaden Huang" ||
+    name === "Ishayu Ghosh" ||
+    name === "Kate Songpetchmongkol" ||
+    name === "Juee Deshmukh" ||
+    name === "Alice Park"
+  ) {
     return "center 45%";
   }
 
-  if (name === "Joyce Ren") {
+  if (name === "Joyce Ren" || name === "Kalyssa Choy") {
     return "center 35%";
   }
 
@@ -138,14 +145,12 @@ export default function PeopleGrid({ members }: PeopleGridProps) {
             style={{
               gridColumn: position.column,
               gridRow: position.row,
-              translate: `${rowOffsets[position.row]}px 0`,
+              translate: `calc(var(--tile-size) * ${
+                rowOffsets[position.row]
+              }) 0`,
             }}
-            onPointerEnter={(event) =>
-              handlePointerMove(event, member.name)
-            }
-            onPointerMove={(event) =>
-              handlePointerMove(event, member.name)
-            }
+            onPointerEnter={(event) => handlePointerMove(event, member.name)}
+            onPointerMove={(event) => handlePointerMove(event, member.name)}
             onPointerLeave={() => setCursor(null)}
           >
             <Image

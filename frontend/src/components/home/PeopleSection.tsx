@@ -59,9 +59,19 @@ export default function PeopleSection() {
           </p>
         </div>
 
-        <Button href="/join" variant="dark">
-          JOIN OUR TEAM
-        </Button>
+        <div className={styles.buttonRow}>
+          <Button
+            href="/members"
+            variant="dark"
+            className={styles.peopleButton}
+          >
+            JOIN OUR TEAM
+          </Button>
+
+          <Button href="/team" variant="light" className={styles.peopleButton}>
+            VIEW FULL TEAM
+          </Button>
+        </div>
       </div>
     </section>
   );
