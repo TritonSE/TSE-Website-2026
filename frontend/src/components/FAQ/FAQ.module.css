@@ -1,0 +1,260 @@
+.faq {
+  --faq-bg: #000000;
+  --faq-accent: #e8a33d;
+  --faq-border: #666666;
+  --faq-border-hover: #ffffff;
+  --faq-text: #cfcfcf;
+  --faq-text-open: #ffffff;
+  --faq-answer: #ffffff;
+  --faq-highlight: rgba(255, 255, 255, 0.06);
+
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  color: var(--faq-text);
+  background-color: var(--faq-bg);
+  font-family: var(--font-stack-sans-text, Arial, Helvetica, sans-serif);
+}
+
+.heading {
+  margin-bottom: 40px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--faq-text-open);
+  font-family: var(
+    --font-stack-sans-notch,
+    var(--font-stack-sans-text, sans-serif)
+  );
+}
+
+.section {
+  margin-bottom: 48px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faq-accent);
+  font-family: var(--font-sometype-mono, monospace);
+}
+
+.expandAll {
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 14px;
+  color: var(--faq-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.expandAll:hover {
+  opacity: 0.75;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item {
+  border: 2px solid var(--faq-border);
+  overflow: hidden;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Hover highlight, and the same highlight for open items. */
+.item:hover {
+  border-color: var(--faq-border-hover);
+  background-color: var(--faq-highlight);
+}
+
+.itemOpen {
+  background-color: var(--faq-highlight);
+  border-color: var(--faq-border-hover);
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 24px;
+  gap: 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--faq-text);
+  transition: color 0.2s ease;
+}
+
+.item:hover .question,
+.itemOpen .question {
+  color: var(--faq-text-open);
+}
+
+.questionText {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  font-family: var(
+    --font-stack-sans-notch,
+    var(--font-stack-sans-text, sans-serif)
+  );
+}
+
+/* Plus icon: two bars. Rotating the wrapper 45deg turns "+" into "x". */
+.icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.iconOpen {
+  transform: rotate(45deg);
+}
+
+.iconBar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+/* Horizontal bar */
+.iconBar:first-child {
+  width: 18px;
+  height: 2px;
+  transform: translate(-50%, -50%);
+}
+
+/* Vertical bar */
+.iconBar:last-child {
+  width: 2px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+}
+
+/* Smooth open/close via grid-template-rows 0fr -> 1fr. */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.panelOpen {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.panel .panelInner {
+  padding: 0 24px;
+}
+
+.panelOpen .panelInner {
+  /* padding animates alongside the row height for a smooth reveal */
+  padding: 0 24px 14px;
+}
+
+.panelInner {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--faq-answer);
+}
+
+.panelInner p + p,
+.panelInner ul + p,
+.panelInner p + h4,
+.panelInner ul + h4 {
+  margin-top: 14px;
+}
+
+/* A paragraph ending in a colon leads directly into its list, so keep it tight. */
+.panelInner p + ul {
+  margin-top: 6px;
+}
+
+.panelInner h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--faq-text-open);
+}
+
+.panelInner ul {
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.panelInner li + li {
+  margin-top: 4px;
+}
+
+.panelInner a {
+  color: var(--faq-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .faq {
+    padding: 32px 16px;
+  }
+
+  .question {
+    padding: 16px;
+  }
+
+  .questionText {
+    font-size: 16px;
+  }
+
+  .panel .panelInner {
+    padding: 0 16px;
+  }
+
+  .panelOpen .panelInner {
+    padding: 0 16px 12px;
+  }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .question,
+  .icon,
+  .panel {
+    transition: none;
+  }
+}
