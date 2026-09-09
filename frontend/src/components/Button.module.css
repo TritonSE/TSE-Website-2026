@@ -33,13 +33,12 @@
   z-index: 1;
 }
 
-/* ---- dark: frosted glass by default -> solid black on hover ---- */
+/* ---- dark: crisp solid-white outline by default -> solid black on hover ---- */
 .dark {
-  /* Frosted glass: faint tint + blur whatever sits behind the box */
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(4px);
+  background: transparent;
+  border: 2px solid #ffffff;
 
-  color: #85898e;
+  color: #ffffff;
 }
 
 /* ---- light: solid light button that darkens slightly on hover ---- */
@@ -68,8 +67,6 @@
 
 @media (hover: hover) and (pointer: fine) {
   .dark:hover {
-    /* Keep the blur through the fade; the opaque black hides it once filled.
-       Removing it here caused a flicker (blur vanished before bg darkened). */
     background: #000;
 
     color: #ffffff;
