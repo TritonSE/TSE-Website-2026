@@ -10,7 +10,8 @@ const timeline = [
   {
     week: "Week 2",
     date: "Sunday 10/12/26",
-    description: "Applications close at midnight and the review process begins.",
+    description:
+      "Applications close at midnight and the review process begins.",
   },
   {
     week: "Week 3",
@@ -46,7 +47,8 @@ export default function Timeline() {
           </p>
 
           <p>
-            <span className={styles.yellowStar}>*</span> TEST Designer and TEST Developer applications
+            <span className={styles.yellowStar}>*</span> TEST Designer and TEST
+            Developer applications
             <br />
             do not require a technical interview round.
           </p>
@@ -56,7 +58,11 @@ export default function Timeline() {
       <div className={styles.timelineRight}>
         <div className={styles.applications}>
           <span className={styles.statusDot} aria-hidden="true" />
-          <span>{isBeforeDeadline() ? "APPLICATIONS NOW OPEN FOR 2026-27" : "APPLICATIONS CLOSED FOR 2026-27"}</span>
+          <span>
+            {isBeforeDeadline()
+              ? "APPLICATIONS NOW OPEN FOR 2026-27"
+              : "APPLICATIONS CLOSED FOR 2026-27"}
+          </span>
         </div>
 
         <div className={styles.timelineItems}>
@@ -69,9 +75,7 @@ export default function Timeline() {
 
               <div className={styles.timelineDescription}>
                 {item.description}
-                {item.star && (
-                  <span className={styles.yellowStar}> *</span>
-                )}
+                {item.star && <span className={styles.yellowStar}> *</span>}
               </div>
             </div>
           ))}

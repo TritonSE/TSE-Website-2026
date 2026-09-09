@@ -6,7 +6,6 @@ export default function MembersPage() {
   return (
     <main className={styles.page}>
       <Timeline />
-
     </main>
   );
 }

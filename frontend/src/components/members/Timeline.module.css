@@ -4,7 +4,7 @@
   box-sizing: border-box;
 
   background: #08090a;
-  
+
   display: grid;
   grid-template-columns: 1fr 1.1fr;
 
