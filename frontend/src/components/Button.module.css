@@ -33,7 +33,6 @@
   z-index: 1;
 }
 
-/* ---- dark: crisp solid-white outline by default -> solid black on hover ---- */
 .dark {
   background: transparent;
   border: 2px solid #ffffff;
@@ -41,7 +40,6 @@
   color: #ffffff;
 }
 
-/* ---- light: solid light button that darkens slightly on hover ---- */
 .light {
   background: #fffffb;
   border-color: rgba(0, 0, 0, 0.12);
@@ -49,8 +47,6 @@
   color: #0a0a0a;
 }
 
-/* ---- chevron icon ----
-   Chevron sits at a fixed slot and slides right on hover. */
 .icon {
   display: inline-flex;
   align-items: center;

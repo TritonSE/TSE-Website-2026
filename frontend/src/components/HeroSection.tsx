@@ -13,12 +13,7 @@ type HeroSectionProps = {
   eyebrow: string;
   /** The large single-word (or short phrase) headline, e.g. "About." */
   headline: string;
-  /**
-   * Overrides the headline font-size ramp, which defaults to the design's
-   * clamp(64px, 19.84vw, 300px) -- i.e. 300px at a 1512px viewport. Headlines
-   * wider than ~4.7em need a smaller ramp so they don't run past the right
-   * gutter: "Nonprofits." is 5.16em wide and only fits below 18.1vw.
-   */
+  /** Overrides the default font-size ramp for headlines too wide for the right gutter. */
   headlineFontSize?: string;
   /** Outlined secondary action, rendered first. */
   outlineCta: CallToAction;
@@ -45,9 +40,7 @@ export default function HeroSection({
           <div className={styles.headerText}>
             <span className={styles.eyebrow}>{eyebrow}</span>
 
-            {/* Two stacked copies of the headline: a solid white silhouette that
-                supplies the outline, and the halftone-filled text on top of it.
-                See HeroSection.module.css for why a text-stroke can't do this. */}
+            {/* Stacked outline + halftone-fill layers; see HeroSection.module.css. */}
             <h1
               className={styles.heading}
               style={
