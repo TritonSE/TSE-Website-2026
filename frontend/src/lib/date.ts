@@ -2,7 +2,7 @@
 
 // Application deadline for the 2026-27 cycle. Used to determine
 // if applications are open or closed for certain renderings
-export const APPLICATION_DEADLINE = "2026-10-12T23:59:00-07:00";
+export const APPLICATION_DEADLINE = "2026-10-11T23:59:00-07:00";
 
 export const CYCLE_LABEL = "2026-27";
 
