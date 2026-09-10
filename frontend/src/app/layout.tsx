@@ -1,14 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Sometype_Mono,
+  Stack_Sans_Notch,
+  Stack_Sans_Text,
+} from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sometypeMono = Sometype_Mono({
+  variable: "--font-sometype-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const stackSansNotch = Stack_Sans_Notch({
+  variable: "--font-stack-sans-notch",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const stackSansText = Stack_Sans_Text({
+  variable: "--font-stack-sans-text",
   subsets: ["latin"],
 });
 
@@ -19,7 +29,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${sometypeMono.variable} ${stackSansNotch.variable} ${stackSansText.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
