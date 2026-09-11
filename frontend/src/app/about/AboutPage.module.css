@@ -1,0 +1,456 @@
+.page {
+  --black: #08090a;
+  --cloud: #fafcfe;
+  --gold: #f4b82e;
+  --silver: #acacac;
+  --white: #fffffb;
+
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  color: var(--white);
+}
+
+.hero {
+  position: relative;
+  height: 100svh;
+  background: #000;
+}
+
+.waveBackground,
+.storyWave {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("/images/great-wave.png");
+  background-position: center;
+  background-size: 100% 100%;
+  opacity: 0.7;
+}
+
+.heroContent {
+  position: absolute;
+  top: clamp(250px, 43vh, 422px);
+  left: 50px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.eyebrow,
+.valuesLabel {
+  color: var(--gold);
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.title {
+  --title-outline: clamp(1.5px, 0.14vw, 2.5px);
+
+  position: relative;
+  isolation: isolate;
+
+  margin-top: 22px;
+  color: var(--white);
+  font-family: var(--font-stack-sans-notch);
+  font-size: clamp(190px, 19.85vw, 300px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: 0em;
+}
+
+.title::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  color: var(--white);
+  content: attr(data-title);
+  pointer-events: none;
+  text-shadow:
+    var(--title-outline) 0 0 var(--white),
+    calc(var(--title-outline) * 0.707) calc(var(--title-outline) * 0.707) 0
+      var(--white),
+    0 var(--title-outline) 0 var(--white),
+    calc(var(--title-outline) * -0.707) calc(var(--title-outline) * 0.707) 0
+      var(--white),
+    calc(var(--title-outline) * -1) 0 0 var(--white),
+    calc(var(--title-outline) * -0.707) calc(var(--title-outline) * -0.707) 0
+      var(--white),
+    0 calc(var(--title-outline) * -1) 0 var(--white),
+    calc(var(--title-outline) * 0.707) calc(var(--title-outline) * -0.707) 0
+      var(--white);
+}
+
+.titleTexture {
+  position: relative;
+  z-index: 1;
+  display: block;
+  background-image: url("/images/great-wave.png");
+  background-position: center;
+  background-size: 100% 100%;
+  background-clip: text;
+  color: transparent;
+  filter: brightness(1.8) contrast(1.2);
+  -webkit-background-clip: text;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-top: 28px;
+}
+
+.heroLocation {
+  position: absolute;
+  right: 50px;
+  bottom: 75px;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--white);
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.locationDot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: blink 1.4s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  50% {
+    background: var(--white);
+  }
+}
+
+.mission {
+  position: relative;
+  height: 498px;
+  overflow: hidden;
+}
+
+.missionImage {
+  object-fit: cover;
+  object-position: center 72%;
+}
+
+.missionShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.96) 0%,
+    rgba(0, 0, 0, 0.72) 26%,
+    rgba(0, 0, 0, 0) 68%
+  );
+}
+
+.missionStatement {
+  position: absolute;
+  top: 165px;
+  left: 50px;
+  width: 467px;
+  color: var(--cloud);
+  font-family: var(--font-stack-sans-notch);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.story {
+  position: relative;
+  display: grid;
+  min-height: 504px;
+  place-items: center;
+  overflow: hidden;
+}
+
+.storyWave {
+  background-size: cover;
+}
+
+.story::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    #000 35%,
+    #000 65%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  content: "";
+}
+
+.storyCopy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(670px, calc(100% - 40px));
+  flex-direction: column;
+  gap: 20px;
+  color: var(--cloud);
+  text-align: center;
+}
+
+.storyCopy h2,
+.teamCopy h2 {
+  color: var(--white);
+  font-family: var(--font-stack-sans-notch);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.storyCopy p,
+.teamCopy p {
+  font-family: var(--font-stack-sans-text);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.storyCopy .storyDate {
+  margin-top: -14px;
+  color: #5c6269;
+  font-family: var(--font-stack-sans-notch);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.valuesSection {
+  display: grid;
+  height: 937px;
+  grid-template-columns: minmax(260px, 374.5px) minmax(430px, 1fr) minmax(
+      260px,
+      374.5px
+    );
+  gap: 50px;
+  align-items: center;
+  padding: 85px 50px;
+  background: #000;
+}
+
+.valuesPhoto {
+  position: relative;
+  width: 100%;
+  height: 767px;
+  overflow: hidden;
+}
+
+.valuesPhoto img {
+  object-fit: cover;
+}
+
+.valuesContent {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.valuesLabel {
+  color: var(--gold);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.valuesList {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  list-style-position: outside;
+  padding-left: 62px;
+}
+
+.valuesList li {
+  padding-left: 0;
+  color: var(--white);
+  font-family: var(--font-stack-sans-notch);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.valuesList h2 {
+  display: inline;
+  font: inherit;
+}
+
+.valuesList p {
+  margin-top: 8px;
+  color: var(--silver);
+  font-family: var(--font-stack-sans-text);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
+  transition: color 350ms ease;
+}
+
+.valuesList p.valueDescriptionActive {
+  color: var(--white);
+}
+
+.teamSection {
+  display: flex;
+  min-height: 665px;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  background: #000;
+}
+
+.teamCopy {
+  display: flex;
+  width: min(670px, calc(100% - 40px));
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  color: var(--cloud);
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .title {
+    font-size: clamp(140px, 20vw, 220px);
+  }
+
+  .valuesSection {
+    height: auto;
+    grid-template-columns: minmax(220px, 0.75fr) minmax(440px, 1.25fr);
+    padding: 70px 40px;
+  }
+
+  .valuesPhoto {
+    height: 720px;
+  }
+
+  .valuesPhoto:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .heroContent {
+    top: 34%;
+    right: 24px;
+    left: 24px;
+  }
+
+  .eyebrow,
+  .location {
+    font-size: 14px;
+  }
+
+  .title {
+    margin-top: 24px;
+    font-size: clamp(92px, 29vw, 180px);
+  }
+
+  .heroButtons {
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .heroLocation {
+    right: 24px;
+    bottom: 34px;
+  }
+
+  .mission {
+    height: 440px;
+  }
+
+  .missionShade {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.2));
+  }
+
+  .missionStatement {
+    top: auto;
+    right: 24px;
+    bottom: 45px;
+    left: 24px;
+    width: auto;
+    font-size: 28px;
+  }
+
+  .story {
+    min-height: 590px;
+    padding: 70px 24px;
+  }
+
+  .story::after {
+    background: rgba(0, 0, 0, 0.72);
+  }
+
+  .storyCopy h2,
+  .storyCopy .storyDate,
+  .teamCopy h2 {
+    font-size: 28px;
+  }
+
+  .storyCopy p,
+  .teamCopy p {
+    font-size: 17px;
+  }
+
+  .valuesSection {
+    display: flex;
+    padding: 70px 24px;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .valuesPhoto {
+    height: 420px;
+  }
+
+  .valuesPhoto:last-child {
+    display: block;
+  }
+
+  .valuesList {
+    gap: 38px;
+    padding-left: 42px;
+  }
+
+  .valuesList li {
+    font-size: 32px;
+  }
+
+  .valuesList p {
+    font-size: 17px;
+  }
+
+  .teamSection {
+    padding: 80px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locationDot {
+    animation: none;
+  }
+}
