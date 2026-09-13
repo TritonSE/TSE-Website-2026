@@ -9,7 +9,7 @@ type ButtonProps = {
   children: ReactNode;
   /** Renders a Next.js Link when set, otherwise a <button>. */
   href?: string;
-  /** Color scheme. "dark" = outlined, "light" = solid. */
+  /** Color scheme. "dark" = frosted -> black on hover, "light" = solid light. */
   variant?: ButtonVariant;
   /** Show the chevron that slides right on hover. */
   arrow?: boolean;
