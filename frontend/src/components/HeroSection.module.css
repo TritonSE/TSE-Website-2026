@@ -101,7 +101,12 @@
   position: relative;
 
   background-image: url("/images/great-wave-halftone.png");
-  background-repeat: no-repeat;
+  /* Tiles horizontally so headlines wider than one crop (e.g. "Nonprofits.")
+     stay fully covered by dots instead of exposing the outline layer past the
+     first tile's edge. background-color is the halftone's own dark gap color,
+     as a fallback for any sub-pixel seam between tiles. */
+  background-repeat: repeat-x;
+  background-color: #070707;
   /* Figma crop, converted to em so the dot pitch tracks the type at every breakpoint. */
   background-size: 5.031em 3.357em;
   background-position: -0.167em -1.514em;
@@ -120,6 +125,10 @@
 }
 
 .location {
+  position: absolute;
+  right: 50px;
+  bottom: 82px;
+
   pointer-events: auto;
 }
 
@@ -141,5 +150,9 @@
 
   .ctas {
     flex-wrap: wrap;
+  }
+
+  .location {
+    position: static;
   }
 }
