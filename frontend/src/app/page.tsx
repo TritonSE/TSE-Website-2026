@@ -7,6 +7,7 @@ import CompanyCarousel from "@/components/home/CompanyCarousel";
 import PeopleSection from "@/components/home/PeopleSection";
 import AboutUs from "@/components/home/AboutUs";
 import ProjectsCarousel from "@/components/home/ProjectsCarousel";
+import WorkWithUs from "@/components/home/WorkWithUs";
 
 export default function Home() {
   return (
@@ -68,6 +69,8 @@ export default function Home() {
         <ImpactStats />
         <AboutUs />
         <PeopleSection />
+
+        <WorkWithUs />
 
         <Footer />
       </section>
