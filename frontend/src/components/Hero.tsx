@@ -15,22 +15,36 @@ export default function Hero() {
           </h1>
         </div>
 
+        <div className={styles.mobileLocation}>
+          <span className={styles.dot} aria-hidden="true" />
+          <span className={styles.locationText}>San Diego, CA</span>
+        </div>
+
         <div className={styles.ctas}>
           <Magnet padding={40} magnetStrength={14}>
-            <Button href="/members" variant="dark">
+            <Button
+              href="/members"
+              variant="dark"
+              className={styles.heroButton}
+            >
               Join Our Team
             </Button>
           </Magnet>
 
           <Magnet padding={40} magnetStrength={14}>
-            <Button href="/contact" variant="light" arrow>
+            <Button
+              href="/contact"
+              variant="light"
+              arrow
+              className={styles.heroButton}
+            >
               Contact Us
             </Button>
           </Magnet>
         </div>
       </div>
 
-      <div className={styles.location}>
+      <div className={styles.desktopLocation}>
         <span className={styles.dot} aria-hidden="true" />
         <span className={styles.locationText}>San Diego, CA</span>
       </div>

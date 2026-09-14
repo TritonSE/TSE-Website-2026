@@ -8,6 +8,8 @@ import PeopleSection from "@/components/home/PeopleSection";
 import AboutUs from "@/components/home/AboutUs";
 import ProjectsCarousel from "@/components/home/ProjectsCarousel";
 
+import styles from "./page.module.css";
+
 export default function Home() {
   return (
     <main>
@@ -30,20 +32,7 @@ export default function Home() {
         </div>
 
         {/* Hero sits on top and scrolls upward normally */}
-        <section
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            minHeight: "100vh",
-            zIndex: 1,
-            backgroundImage: "url('/images/great-wave.png')",
-            backgroundSize: "100% 100%",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
+        <section className={styles.heroSection}>
           <Navbar />
           <Hero />
         </section>
@@ -68,7 +57,6 @@ export default function Home() {
         <ImpactStats />
         <AboutUs />
         <PeopleSection />
-
         <Footer />
       </section>
     </main>
