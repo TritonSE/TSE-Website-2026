@@ -90,35 +90,57 @@ export default function CompanyCarousel() {
     <section className={styles.section}>
       <h2 className={styles.title}>Our members work at...</h2>
 
-      <div
-        className={styles.carousel}
-        onPointerMove={handlePointerMove}
-        onPointerLeave={handlePointerLeave}
-      >
-        <LogoLoop
-          logos={firstRow}
-          speed={100}
-          direction="left"
-          logoHeight={60}
-          gap={120}
-          pauseOnHover={true}
-          fadeOut={false}
-          scaleOnHover={false}
-          ariaLabel="Companies our members work for"
-        />
+      {/* Desktop only */}
+      <div className={styles.desktopRows}>
+        <div
+          className={styles.carousel}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={handlePointerLeave}
+        >
+          <LogoLoop
+            logos={firstRow}
+            speed={100}
+            direction="left"
+            logoHeight={60}
+            gap={120}
+            pauseOnHover={true}
+            fadeOut={false}
+            scaleOnHover={false}
+            ariaLabel="Companies our members work for"
+          />
+        </div>
+
+        <div
+          className={styles.carousel}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={handlePointerLeave}
+        >
+          <LogoLoop
+            logos={secondRow}
+            speed={100}
+            direction="right"
+            logoHeight={60}
+            gap={120}
+            pauseOnHover={true}
+            fadeOut={false}
+            scaleOnHover={false}
+            ariaLabel="Companies our members work for"
+          />
+        </div>
       </div>
 
+      {/* Mobile only */}
       <div
-        className={styles.carousel}
+        className={`${styles.carousel} ${styles.mobileRow}`}
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
       >
         <LogoLoop
-          logos={secondRow}
+          logos={companyLogos}
           speed={100}
-          direction="right"
-          logoHeight={60}
-          gap={120}
+          direction="left"
+          logoHeight={40}
+          gap={60}
           pauseOnHover={true}
           fadeOut={false}
           scaleOnHover={false}
