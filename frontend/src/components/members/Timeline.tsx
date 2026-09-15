@@ -39,18 +39,11 @@ export default function Timeline() {
           <h2>Our Timeline</h2>
 
           <p>
-            Please note that these dates are subject to
-            <br />
-            change depending on application volume. Check
-            <br />
-            back often for the most up-to-date information!
+            Please note that these dates are subject to change depending on application volume. Check back often for the most up-to-date information!
           </p>
 
           <p>
-            <span className={styles.yellowStar}>*</span> TEST Designer and TEST
-            Developer applications
-            <br />
-            do not require a technical interview round.
+            <span className={styles.yellowStar}>*</span> TEST Designer and TEST Developer applications do not require a technical interview round.
           </p>
         </div>
       </div>
