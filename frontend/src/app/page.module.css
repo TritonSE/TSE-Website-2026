@@ -94,6 +94,23 @@ a.secondary {
   border-color: var(--button-secondary-border);
 }
 
+/* Hero background - desktop stays exactly like before */
+.heroSection {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  min-height: 100vh;
+
+  z-index: 1;
+
+  background-image: url("/images/great-wave.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
@@ -120,6 +137,11 @@ a.secondary {
     font-size: 32px;
     line-height: 40px;
     letter-spacing: -1.92px;
+  }
+
+  .heroSection {
+    background-size: cover;
+    background-position: 42% center;
   }
 }
 
