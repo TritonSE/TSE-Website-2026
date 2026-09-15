@@ -1,0 +1,158 @@
+.heroSection {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+
+  background-color: #08090a;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background-image: url("/images/great-wave.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  opacity: 0.55;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.body {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+
+  padding: 0 50px 82px 50px;
+}
+
+.textAndButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.eyebrow {
+  color: #f4b82e;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.heading {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+
+  font-family: var(--font-stack-sans-notch), sans-serif;
+  font-optical-sizing: auto;
+  /* 19.84vw = the design's 300px at a 1512px viewport. */
+  font-size: var(--heading-font-size, clamp(64px, 19.84vw, 300px));
+  font-weight: 500;
+  /* Pinned so the halftone crop below stays aligned to the glyphs. */
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* Back layer: the outline. Stroking in the fill color hides the seams between
+   Stack Sans Notch's overlapping glyph subpaths, leaving a clean silhouette
+   that .headingFill then masks down to just the outline. */
+.headingOutline {
+  position: absolute;
+  inset: 0;
+
+  color: #fffffb;
+  -webkit-text-stroke: 0.01em #fffffb;
+}
+
+/* Front layer: the bright halftone, clipped to the glyphs. Must stay fully
+   opaque -- its dark gaps are what hide the outline layer behind it. */
+.headingFill {
+  position: relative;
+
+  background-image: url("/images/great-wave-halftone.png");
+  /* Tiles horizontally so headlines wider than one crop (e.g. "Nonprofits.")
+     stay fully covered by dots instead of exposing the outline layer past the
+     first tile's edge. background-color is the halftone's own dark gap color,
+     as a fallback for any sub-pixel seam between tiles. */
+  background-repeat: repeat-x;
+  background-color: #070707;
+  /* Figma crop, converted to em so the dot pitch tracks the type at every breakpoint. */
+  background-size: 5.031em 3.357em;
+  background-position: -0.167em -1.514em;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.ctas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+.location {
+  position: absolute;
+  right: 50px;
+  bottom: 82px;
+
+  pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .heading {
+    font-size: clamp(48px, 18vw, 200px);
+    white-space: normal;
+  }
+}
+
+@media (max-width: 600px) {
+  .body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+
+    padding: 0 24px 40px 24px;
+  }
+
+  .ctas {
+    flex-wrap: wrap;
+  }
+
+  .location {
+    position: static;
+  }
+}
