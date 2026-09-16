@@ -1,4 +1,6 @@
+'use client';
 import Button from "@/components/Button";
+import {useEffect, useRef, useState} from "react";
 
 import styles from "./AboutUs.module.css";
 
@@ -23,6 +25,14 @@ const rowBPhotos = [
   "/images/about-us/row-b-7.jpg",
 ];
 
+const carouselPhotos = [
+  "/images/about-us/row-a-4.jpg",
+  "/images/about-us/row-b-4.jpg",
+  "/images/about-us/row-b-1.jpg",
+  "/images/about-us/row-a-7.jpg",
+  "/images/about-us/row-a-6.jpg",
+];
+
 type PhotoRowProps = {
   photos: string[];
   direction: "left" | "right";
@@ -45,7 +55,84 @@ function PhotoRow({ photos, direction }: PhotoRowProps) {
   );
 }
 
+function PhotoCarousel({ photos }: { photos: string[] }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const photoRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = photoRefs.current.indexOf(entry.target as HTMLDivElement);
+            if (index !== -1) {
+              setCurrentIndex(index);
+            }
+          }
+        });
+      },
+      { root: track, threshold: 0.6 }
+    );
+
+    photoRefs.current.forEach((photo) => {
+      if (photo) observer.observe(photo);
+    });
+
+    return () => observer.disconnect();
+  }, [photos]);
+
+  return (
+    <div className={styles.carouselWrapper}>
+      <div className={styles.carouselTrack} ref={trackRef}>
+        {photos.map((src, index) => (
+          <div
+            className={`${styles.photo} ${styles.carouselPhoto}`}
+            key={`${src}-${index}`}
+            ref={(el) => {
+              photoRefs.current[index] = el;
+            }}
+          >
+            <img src={src} alt="" loading="lazy" />
+          </div>
+        ))}
+      </div>
+      <div className={styles.dots}>
+        {photos.map((_, index) => (
+          <span
+            key={index}
+            className={`${styles.dot} ${
+              index === currentIndex ? styles.dotActive : ""
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function AboutUs() {
+
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <section className={styles.section}>
       <div className={styles.text}>
@@ -61,10 +148,16 @@ export default function AboutUs() {
         </Button>
       </div>
 
-      <div className={styles.carousels}>
-        <PhotoRow photos={rowAPhotos} direction="left" />
-        <PhotoRow photos={rowBPhotos} direction="right" />
-      </div>
+      {dimensions.width > 600 ? (
+        <div className={styles.carousels}>
+          <PhotoRow photos={rowAPhotos} direction="left" />
+          <PhotoRow photos={rowBPhotos} direction="right" />
+        </div>
+      ) : (
+        <div className={styles.carousels}>
+          <PhotoCarousel photos={carouselPhotos} />
+        </div>
+      )}
     </section>
   );
 }

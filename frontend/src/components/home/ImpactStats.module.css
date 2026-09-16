@@ -30,7 +30,7 @@
 }
 
 .description {
-  color: var(--White, #fffffb);
+  color: #EBECED;
   text-align: center;
 
   font-family: var(--font-stack-sans-text);
@@ -48,10 +48,18 @@
 
 @media (max-width: 600px) {
   .section {
-    padding: 80px 24px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .stat {
+    width: 270px;
+  }
+
+  .description {
+    font-size: 14px;
   }
 
   .number {
-    font-size: 64px;
+    font-size: 80px;
   }
 }
