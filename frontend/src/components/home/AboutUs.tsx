@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import Button from "@/components/Button";
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./AboutUs.module.css";
 
@@ -68,14 +68,16 @@ function PhotoCarousel({ photos }: { photos: string[] }) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = photoRefs.current.indexOf(entry.target as HTMLDivElement);
+            const index = photoRefs.current.indexOf(
+              entry.target as HTMLDivElement,
+            );
             if (index !== -1) {
               setCurrentIndex(index);
             }
           }
         });
       },
-      { root: track, threshold: 0.6 }
+      { root: track, threshold: 0.6 },
     );
 
     photoRefs.current.forEach((photo) => {
@@ -115,14 +117,13 @@ function PhotoCarousel({ photos }: { photos: string[] }) {
 }
 
 export default function AboutUs() {
-
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const handleResize = () => {
       setDimensions({
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight,
       });
     };
     handleResize();
