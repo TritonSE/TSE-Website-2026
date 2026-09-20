@@ -1,3 +1,5 @@
+// PeopleGrid.tsx
+
 "use client";
 
 import Image from "next/image";
@@ -22,6 +24,12 @@ interface CursorState {
 }
 
 interface Position {
+  column: number;
+  row: number;
+}
+
+interface MobileSlot {
+  member: Member | null;
   column: number;
   row: number;
 }
@@ -96,6 +104,49 @@ const rowOffsets: Record<number, number> = {
   5: 0.45,
 };
 
+const mobileRowOffsets = [-18, 12, -8, 20, -14, 8];
+
+function buildMobileSlots(members: Member[]): MobileSlot[] {
+  const slots: MobileSlot[] = [];
+
+  const gapColumns: Array<number | null> = [null, 3, null, 5, null, 2];
+
+  let memberIndex = 0;
+  let row = 1;
+
+  while (memberIndex < members.length) {
+    const gapColumn = gapColumns[(row - 1) % gapColumns.length];
+
+    for (let column = 1; column <= 6; column += 1) {
+      if (column === gapColumn) {
+        slots.push({
+          member: null,
+          column,
+          row,
+        });
+
+        continue;
+      }
+
+      if (memberIndex >= members.length) {
+        break;
+      }
+
+      slots.push({
+        member: members[memberIndex],
+        column,
+        row,
+      });
+
+      memberIndex += 1;
+    }
+
+    row += 1;
+  }
+
+  return slots;
+}
+
 function getObjectPosition(name: string) {
   if (
     name === "Alice Guo" ||
@@ -122,6 +173,8 @@ export default function PeopleGrid({ members }: PeopleGridProps) {
     return null;
   }
 
+  const mobileSlots = buildMobileSlots(members);
+
   const handlePointerMove = (
     event: PointerEvent<HTMLDivElement>,
     name: string,
@@ -134,38 +187,88 @@ export default function PeopleGrid({ members }: PeopleGridProps) {
   };
 
   return (
-    <div className={styles.mosaic}>
-      {positions.map((position, index) => {
-        const member = members[(index * 7) % members.length];
+    <>
+      <div className={`${styles.mosaic} ${styles.desktopMosaic}`}>
+        {positions.map((position, index) => {
+          const member = members[(index * 7) % members.length];
 
-        return (
-          <div
-            key={`${member.src}-${index}`}
-            className={styles.memberCard}
-            style={{
-              gridColumn: position.column,
-              gridRow: position.row,
-              translate: `calc(var(--tile-size) * ${
-                rowOffsets[position.row]
-              }) 0`,
-            }}
-            onPointerEnter={(event) => handlePointerMove(event, member.name)}
-            onPointerMove={(event) => handlePointerMove(event, member.name)}
-            onPointerLeave={() => setCursor(null)}
-          >
-            <Image
-              src={member.src}
-              alt={member.name}
-              fill
-              sizes="80px"
-              className={styles.memberImage}
+          return (
+            <div
+              key={`${member.src}-desktop-${index}`}
+              className={styles.memberCard}
               style={{
-                objectPosition: getObjectPosition(member.name),
+                gridColumn: position.column,
+                gridRow: position.row,
+                translate: `calc(var(--tile-size) * ${
+                  rowOffsets[position.row]
+                }) 0`,
               }}
-            />
-          </div>
-        );
-      })}
+              onPointerEnter={(event) => handlePointerMove(event, member.name)}
+              onPointerMove={(event) => handlePointerMove(event, member.name)}
+              onPointerLeave={() => setCursor(null)}
+            >
+              <Image
+                src={member.src}
+                alt={member.name}
+                fill
+                sizes="80px"
+                className={styles.memberImage}
+                style={{
+                  objectPosition: getObjectPosition(member.name),
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      <div className={`${styles.mosaic} ${styles.mobileMosaic}`}>
+        {mobileSlots.map((slot) => {
+          if (!slot.member) {
+            return (
+              <div
+                key={`gap-${slot.row}-${slot.column}`}
+                className={styles.mobileGap}
+                style={{
+                  gridColumn: slot.column,
+                  gridRow: slot.row,
+                }}
+              />
+            );
+          }
+
+          const member = slot.member;
+
+          const offset =
+            mobileRowOffsets[(slot.row - 1) % mobileRowOffsets.length];
+
+          return (
+            <div
+              key={`${member.src}-mobile`}
+              className={styles.memberCard}
+              style={{
+                gridColumn: slot.column,
+                gridRow: slot.row,
+                translate: `${offset}px 0`,
+              }}
+              onPointerEnter={(event) => handlePointerMove(event, member.name)}
+              onPointerMove={(event) => handlePointerMove(event, member.name)}
+              onPointerLeave={() => setCursor(null)}
+            >
+              <Image
+                src={member.src}
+                alt={member.name}
+                fill
+                sizes="64px"
+                className={styles.memberImage}
+                style={{
+                  objectPosition: getObjectPosition(member.name),
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
 
       {cursor && (
         <div
@@ -178,6 +281,6 @@ export default function PeopleGrid({ members }: PeopleGridProps) {
           <NameTag name={cursor.name} />
         </div>
       )}
-    </div>
+    </>
   );
 }
