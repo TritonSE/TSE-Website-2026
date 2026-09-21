@@ -115,6 +115,10 @@
   display: none;
 }
 
+.carouselPhoto {
+  scroll-snap-align: center;
+}
+
 .dots {
   display: flex;
   align-items: center;
@@ -164,9 +168,14 @@
 
 @media (max-width: 600px) {
   .section {
-    padding: 60px 30px;
+    padding: 50px 30px;
+    gap: 20px;
   }
 
+  .text {
+    gap: 10px;
+  }
+  
   .text > * {
     text-align: left;
     margin-right: auto;
@@ -178,6 +187,7 @@
 
   .body {
     font-size: 14px;
+    padding: 0 0 10px 0;
   }
 
   .photo {
