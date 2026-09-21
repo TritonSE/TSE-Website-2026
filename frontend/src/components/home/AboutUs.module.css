@@ -175,7 +175,7 @@
   .text {
     gap: 10px;
   }
-  
+
   .text > * {
     text-align: left;
     margin-right: auto;
