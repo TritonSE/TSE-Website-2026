@@ -44,7 +44,8 @@ function FlipText({ children }: { children: string }) {
 }
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const pathname = usePathname();
 
   const isWorkWithUsActive = WORK_WITH_US_ROUTES.includes(pathname);
@@ -94,14 +95,14 @@ export default function Navbar() {
             className={`${styles.dropdownButton} ${
               isWorkWithUsActive ? styles.navLinkActive : ""
             }`}
-            onClick={() => setIsOpen((open) => !open)}
-            aria-expanded={isOpen}
+            onClick={() => setIsDropdownOpen((open) => !open)}
+            aria-expanded={isDropdownOpen}
           >
             <FlipText>Work With Us</FlipText>
 
             <svg
               className={`${styles.chevron} ${
-                isOpen ? styles.chevronOpen : ""
+                isDropdownOpen ? styles.chevronOpen : ""
               }`}
               width="10"
               height="6"
@@ -119,7 +120,7 @@ export default function Navbar() {
             </svg>
           </button>
 
-          {isOpen && (
+          {isDropdownOpen && (
             <div className={styles.dropdownMenu}>
               <Link href="/members" className={styles.dropdownItem}>
                 Members
@@ -136,6 +137,20 @@ export default function Navbar() {
           )}
         </div>
       </div>
+
+      <button
+        type="button"
+        className={`${styles.hamburger} ${
+          isMobileOpen ? styles.hamburgerOpen : ""
+        }`}
+        onClick={() => setIsMobileOpen((open) => !open)}
+        aria-label="Toggle navigation"
+        aria-expanded={isMobileOpen}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
     </nav>
   );
 }

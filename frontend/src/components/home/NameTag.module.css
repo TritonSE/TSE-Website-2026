@@ -1,0 +1,35 @@
+.nameTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 12px 24px;
+
+  background: #fffffb;
+  border-radius: 999px;
+}
+
+.circle {
+  width: 14px;
+  height: 14px;
+  aspect-ratio: 1 / 1;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background: var(--Gold50, #f4b82e);
+}
+
+.name {
+  color: var(--Black, #08090a);
+
+  font-family: var(--font-sometype-mono), "Sometype Mono", monospace;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.42px;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
