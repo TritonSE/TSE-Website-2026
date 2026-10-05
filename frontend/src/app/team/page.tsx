@@ -4,7 +4,7 @@ export default function TeamPage() {
   return (
     <main>
       <HeroSection
-        eyebrow="100 Members"
+        eyebrow="96 Members"
         headline="Team."
         outlineCta={{ label: "Our Culture", href: "#culture" }}
         solidCta={{ label: "Join Us", href: "/members" }}
