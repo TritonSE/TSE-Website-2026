@@ -3,9 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import styles from "./Navbar.module.css";
+
+const WORK_WITH_US_ROUTES = ["/members", "/nonprofits", "/sponsors"];
 
 function FlipText({ children }: { children: string }) {
   return (
@@ -43,6 +46,9 @@ function FlipText({ children }: { children: string }) {
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isWorkWithUsActive = WORK_WITH_US_ROUTES.includes(pathname);
 
   return (
     <nav className={styles.navbar}>
@@ -56,22 +62,39 @@ export default function Navbar() {
       </Link>
 
       <div className={styles.links}>
-        <Link href="/about" className={styles.navLink}>
+        <Link
+          href="/about"
+          className={`${styles.navLink} ${
+            pathname === "/about" ? styles.navLinkActive : ""
+          }`}
+        >
           <FlipText>About</FlipText>
         </Link>
 
-        <Link href="/team" className={styles.navLink}>
+        <Link
+          href="/team"
+          className={`${styles.navLink} ${
+            pathname === "/team" ? styles.navLinkActive : ""
+          }`}
+        >
           <FlipText>Team</FlipText>
         </Link>
 
-        <Link href="/projects" className={styles.navLink}>
+        <Link
+          href="/projects"
+          className={`${styles.navLink} ${
+            pathname === "/projects" ? styles.navLinkActive : ""
+          }`}
+        >
           <FlipText>Projects</FlipText>
         </Link>
 
         <div className={styles.dropdown}>
           <button
             type="button"
-            className={styles.dropdownButton}
+            className={`${styles.dropdownButton} ${
+              isWorkWithUsActive ? styles.navLinkActive : ""
+            }`}
             onClick={() => setIsDropdownOpen((open) => !open)}
             aria-expanded={isDropdownOpen}
           >

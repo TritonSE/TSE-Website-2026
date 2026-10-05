@@ -66,57 +66,15 @@
   pointer-events: auto;
 }
 
-.desktopLocation,
-.mobileLocation {
-  align-items: center;
+/* Button styling lives in Button.module.css (shared component) */
 
-  gap: 10px;
-
+/* Dot/text styling lives in BlinkingLocation.module.css (shared component) */
+.desktopLocation {
   pointer-events: auto;
 }
 
-.desktopLocation {
-  display: inline-flex;
-}
-
-.mobileLocation {
+.hero .mobileLocation {
   display: none;
-}
-
-.dot {
-  width: 9px;
-  height: 9px;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-
-  background-color: #f4b82e;
-
-  animation: dotBlink 1.4s infinite;
-}
-
-.locationText {
-  color: #fffffb;
-
-  font-family: var(--font-sometype-mono);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-}
-
-@keyframes dotBlink {
-  0%,
-  49% {
-    background-color: #f4b82e;
-  }
-
-  50%,
-  100% {
-    background-color: #fffffb;
-  }
 }
 
 @media (max-width: 600px) {
@@ -156,24 +114,25 @@
     line-height: 1.08;
   }
 
-  .mobileLocation {
+  .hero .mobileLocation {
     display: inline-flex;
 
     margin-top: 26px;
   }
 
-  .desktopLocation {
+  .hero .desktopLocation {
     display: none;
   }
 
-  .locationText {
-    font-size: 14px;
-    letter-spacing: 0.5px;
-  }
-
-  .dot {
+  /* Shrink BlinkingLocation's dot (first span) and text (last span) */
+  .mobileLocation > span:first-child {
     width: 8px;
     height: 8px;
+  }
+
+  .mobileLocation > span:last-child {
+    font-size: 14px;
+    letter-spacing: 0.5px;
   }
 
   .ctas {
