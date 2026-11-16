@@ -40,7 +40,7 @@ export default function Footer({ active }: { active?: FooterPage }) {
         />
         <InternalLinks
           variant="desktop"
-          className={ styles.desktopLinks}
+          className={styles.desktopLinks}
           active={active}
         />
         <OutboundLinks variant="desktop" className={styles.desktopOutbound} />

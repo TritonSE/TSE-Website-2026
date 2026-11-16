@@ -5,7 +5,7 @@ import Footer from "@/components/Footer/Footer";
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Footer active="home" />  
+      <Footer active="home" />
     </div>
   );
 }
