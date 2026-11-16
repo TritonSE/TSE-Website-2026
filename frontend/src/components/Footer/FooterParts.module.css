@@ -1,0 +1,208 @@
+/*
+ * Appearance of each footer part. Base rules apply to both layouts;
+ * `.desktop` / `.mobile` blocks under each part hold the differences.
+ * Placement on the page lives in Footer.module.css.
+ */
+
+/* ---------- Mission ---------- */
+
+.mission {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  font-family: var(--font-stack-sans-text);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.mission.desktop {
+  max-width: 430px;
+}
+
+.mission.mobile {
+  width: 65%;
+  color: #adb1b4;
+  font-size: max(14px, 3.5vw);
+}
+
+/* ---------- Clock ---------- */
+
+.clock {
+  display: flex;
+  flex-direction: column;
+}
+
+.clock.desktop {
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.clock.mobile {
+  align-items: center;
+  gap: 40px;
+}
+
+.time {
+  font-family: var(--font-stack-sans-notch);
+  font-size: 150px;
+  font-weight: 500;
+  line-height: 0.85;
+  letter-spacing: 10%;
+  white-space: nowrap;
+}
+
+/* Oversized and dimmed; bleeds past both edges (the footer clips it) */
+.mobile .time {
+  font-size: 38vw;
+  letter-spacing: 0;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 19px;
+  letter-spacing: 2px;
+}
+
+.mobile .location {
+  font-size: max(12px, 3vw);
+}
+
+/* Colon and status dot blink together, timed by --blink-interval on the footer */
+.colon {
+  animation: colonBlink var(--blink-interval, 1s) infinite;
+}
+
+.statusDot {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background-color: #f5c542;
+
+  animation: dotBlink var(--blink-interval, 1s) infinite;
+}
+
+@keyframes colonBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dotBlink {
+  0%,
+  49% {
+    background-color: #f5c542;
+  }
+  50%,
+  100% {
+    background-color: #fffffb;
+  }
+}
+
+/* ---------- Internal links ---------- */
+
+.internalLinks {
+  display: grid;
+  row-gap: 10px;
+}
+
+/* Two columns filled top to bottom; --link-rows is set in FooterParts.tsx */
+.internalLinks.desktop {
+  grid-template-columns: repeat(2, max-content);
+  grid-template-rows: repeat(var(--link-rows, 3), auto);
+  grid-auto-flow: column;
+  column-gap: 75px;
+}
+
+.internalLinks.mobile {
+  grid-template-columns: max-content;
+}
+
+.internalLink {
+  width: fit-content;
+
+  color: #808285;
+  border-bottom: 1px solid transparent;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 19px;
+  letter-spacing: 1.5px;
+
+  transition:
+    transform 0.5s ease,
+    border-color 0.5s ease;
+}
+
+.internalLink:hover {
+  transform: translateY(-3px);
+  border-bottom-color: currentColor;
+}
+
+.internalLink.active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* ---------- Outbound links ---------- */
+
+.outboundLinks {
+  display: flex;
+  width: 100%;
+}
+
+.outboundLinks.desktop {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 9px;
+}
+
+.outboundLinks.mobile {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 12px;
+}
+
+.outboundLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #acacac;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 19px;
+  letter-spacing: 1.5px;
+
+  transition:
+    color 0.5s ease,
+    gap 0.5s ease;
+}
+
+.mobile .outboundLink {
+  font-size: max(12px, 3vw);
+}
+
+.outboundLink:hover {
+  color: #f5c542;
+  gap: 20px;
+}
+
+/* Sized relative to the link text so it scales with it */
+.arrow {
+  width: 0.7em;
+  height: 0.7em;
+  flex-shrink: 0;
+}

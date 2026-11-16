@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import FAQ from "@/components/FAQ/FAQ";
 import { faqSections } from "./faqContent";
 import Timeline from "@/components/members/Timeline";
+import Footer from "@/components/Footer/Footer";
 import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Members | Triton Software Engineering",
@@ -13,6 +14,7 @@ export default function MembersPage() {
     <main className={styles.page}>
       <Timeline />
       <FAQ sections={faqSections} />
+      <Footer active="members" />
     </main>
   );
 }

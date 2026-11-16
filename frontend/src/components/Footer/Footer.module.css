@@ -1,0 +1,60 @@
+/*
+ * Footer layout only: which layout shows at which width, and where each part
+ * sits. How the parts look lives in FooterParts.module.css.
+ */
+
+.footer {
+  --blink-interval: 1s;
+
+  width: 100%;
+  color: #ffffff;
+}
+
+/* ---------- Desktop: 2x2 grid ---------- */
+
+.desktop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 80px;
+
+  padding: 64px 6.5% 120px;
+}
+
+.desktopClock,
+.desktopOutbound {
+  justify-self: end;
+}
+
+.desktopLinks,
+.desktopOutbound {
+  align-self: start;
+}
+
+/* ---------- Mobile: single column ---------- */
+
+.mobile {
+  display: none;
+  flex-direction: column;
+  gap: 64px;
+
+  padding: 0 6% 36px;
+
+  overflow: hidden;
+}
+
+.mobileOutbound {
+  width: 90%;
+  align-self: center;
+}
+
+/* ---------- Breakpoint ---------- */
+
+@media (max-width: 900px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+  }
+}
