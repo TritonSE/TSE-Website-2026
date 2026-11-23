@@ -9,6 +9,8 @@ export type FAQItem = {
 };
 
 export type FAQSection = {
+  /** Anchor id so other parts of the page can link to this section. */
+  id?: string;
   title: string;
   items: FAQItem[];
 };
@@ -69,7 +71,11 @@ export default function FAQ({
       {sections.map((section, sectionIndex) => {
         const expanded = isSectionExpanded(sectionIndex, section.items.length);
         return (
-          <div className={styles.section} key={section.title}>
+          <div
+            className={styles.section}
+            key={section.title}
+            id={section.id}
+          >
             <div className={styles.sectionHeader}>
               <h3 className={styles.sectionTitle}>{section.title}</h3>
               <button

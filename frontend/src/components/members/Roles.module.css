@@ -1,0 +1,120 @@
+.roleSection {
+  /* TODO swap with global styling once merged */
+  --role-bg: #000000;
+  --role-accent: #e8a33d;
+  --role-border: #666666;
+  --role-border-hover: #ffffff;
+  --role-text: #cfcfcf;
+  --role-text-open: #ffffff;
+  --role-answer: #ffffff;
+  --role-highlight: rgba(255, 255, 255, 0.06);
+
+  padding: 75px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  background-color: var(--role-bg);
+}
+
+.headerSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 10%;
+}
+
+.header {
+  text-align: center;
+  font-family: var(--font-stack-sans-notch);
+  font-size: 32px;
+}
+
+.headerBody {
+  text-align: center;
+  font-family: var(--font-stack-sans-text);
+}
+
+.headerBody a {
+  color: var(--role-accent);
+  text-decoration: underline;
+}
+
+.roleBody {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 50px;
+}
+
+.cardSection {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+  border: 2px solid var(--role-border);
+  transition: border-color 0.2s;
+}
+
+.cardSection:hover,
+.cardSection:focus-within {
+  border-color: var(--role-border-hover);
+}
+
+.cardImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 600 / 424;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+
+.cardSection:hover .cardImage,
+.cardSection:focus-within .cardImage {
+  filter: none;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  flex: 1;
+}
+
+.cardText .header,
+.cardText .headerBody {
+  text-align: left;
+}
+
+.buttonSection {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+/* 
+!!!! TODO !!!! 
+Placeholder button styling. Remove once placeholder button has been replaced.
+*/
+.placeholderButtonSecondary {
+  background: transparent;
+}
+.placeholderButtonPrimary {
+  background-color: white;
+  color: black;
+}
+
+.placeholderButtonPrimary,
+.placeholderButtonSecondary {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  padding: 12px 20px;
+  border: 2px solid white;
+}

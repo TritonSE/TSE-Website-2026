@@ -93,6 +93,7 @@ export const faqSections: FAQSection[] = [
     ],
   },
   {
+    id: "faq-developer",
     title: "Developer",
     items: [
       {
@@ -206,6 +207,7 @@ export const faqSections: FAQSection[] = [
     ],
   },
   {
+    id: "faq-designer",
     title: "Designer",
     items: [
       {
@@ -278,6 +280,7 @@ export const faqSections: FAQSection[] = [
     ],
   },
   {
+    id: "faq-test",
     title: "Test",
     items: [
       {
