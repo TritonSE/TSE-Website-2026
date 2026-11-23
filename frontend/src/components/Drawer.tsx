@@ -9,18 +9,13 @@ type HeadingLevel = "h2" | "h3" | "h4";
 type DrawerProps = {
   title: ReactNode;
   children: ReactNode;
-  /** Controlled open state. Omit to let the drawer manage itself. */
   open?: boolean;
-  /** Initial open state when uncontrolled. */
   defaultOpen?: boolean;
-  /** Called with the requested next state when the header is clicked. */
   onOpenChange?: (open: boolean) => void;
-  /** Heading element wrapping the toggle, for correct document outline. */
   headingLevel?: HeadingLevel;
   className?: string;
 };
 
-/** "+" that rotates 45deg into an "x" when open. */
 function PlusIcon() {
   return (
     <svg
