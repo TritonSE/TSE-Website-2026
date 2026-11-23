@@ -3,9 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import styles from "./Navbar.module.css";
+
+const WORK_WITH_US_ROUTES = ["/members", "/nonprofits", "/sponsors"];
 
 function FlipText({ children }: { children: string }) {
   return (
@@ -41,7 +44,11 @@ function FlipText({ children }: { children: string }) {
 }
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isWorkWithUsActive = WORK_WITH_US_ROUTES.includes(pathname);
 
   return (
     <nav className={styles.navbar}>
@@ -55,30 +62,47 @@ export default function Navbar() {
       </Link>
 
       <div className={styles.links}>
-        <Link href="/about" className={styles.navLink}>
+        <Link
+          href="/about"
+          className={`${styles.navLink} ${
+            pathname === "/about" ? styles.navLinkActive : ""
+          }`}
+        >
           <FlipText>About</FlipText>
         </Link>
 
-        <Link href="/team" className={styles.navLink}>
+        <Link
+          href="/team"
+          className={`${styles.navLink} ${
+            pathname === "/team" ? styles.navLinkActive : ""
+          }`}
+        >
           <FlipText>Team</FlipText>
         </Link>
 
-        <Link href="/projects" className={styles.navLink}>
+        <Link
+          href="/projects"
+          className={`${styles.navLink} ${
+            pathname === "/projects" ? styles.navLinkActive : ""
+          }`}
+        >
           <FlipText>Projects</FlipText>
         </Link>
 
         <div className={styles.dropdown}>
           <button
             type="button"
-            className={styles.dropdownButton}
-            onClick={() => setIsOpen((open) => !open)}
-            aria-expanded={isOpen}
+            className={`${styles.dropdownButton} ${
+              isWorkWithUsActive ? styles.navLinkActive : ""
+            }`}
+            onClick={() => setIsDropdownOpen((open) => !open)}
+            aria-expanded={isDropdownOpen}
           >
             <FlipText>Work With Us</FlipText>
 
             <svg
               className={`${styles.chevron} ${
-                isOpen ? styles.chevronOpen : ""
+                isDropdownOpen ? styles.chevronOpen : ""
               }`}
               width="10"
               height="6"
@@ -96,7 +120,7 @@ export default function Navbar() {
             </svg>
           </button>
 
-          {isOpen && (
+          {isDropdownOpen && (
             <div className={styles.dropdownMenu}>
               <Link href="/members" className={styles.dropdownItem}>
                 Members
@@ -113,6 +137,20 @@ export default function Navbar() {
           )}
         </div>
       </div>
+
+      <button
+        type="button"
+        className={`${styles.hamburger} ${
+          isMobileOpen ? styles.hamburgerOpen : ""
+        }`}
+        onClick={() => setIsMobileOpen((open) => !open)}
+        aria-label="Toggle navigation"
+        aria-expanded={isMobileOpen}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
     </nav>
   );
 }

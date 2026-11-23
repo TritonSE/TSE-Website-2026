@@ -1,3 +1,4 @@
+import BlinkingLocation from "./BlinkingLocation";
 import Button from "./Button";
 import Magnet from "./reactbits/Magnet/Magnet";
 import styles from "./Hero.module.css";
@@ -15,25 +16,33 @@ export default function Hero() {
           </h1>
         </div>
 
+        <BlinkingLocation className={styles.mobileLocation} />
+
         <div className={styles.ctas}>
           <Magnet padding={40} magnetStrength={14}>
-            <Button href="/members" variant="dark">
+            <Button
+              href="/members"
+              variant="dark"
+              className={styles.heroButton}
+            >
               Join Our Team
             </Button>
           </Magnet>
 
           <Magnet padding={40} magnetStrength={14}>
-            <Button href="/contact" variant="light" arrow>
+            <Button
+              href="/contact"
+              variant="light"
+              arrow
+              className={styles.heroButton}
+            >
               Contact Us
             </Button>
           </Magnet>
         </div>
       </div>
 
-      <div className={styles.location}>
-        <span className={styles.dot} aria-hidden="true" />
-        <span className={styles.locationText}>San Diego, CA</span>
-      </div>
+      <BlinkingLocation className={styles.desktopLocation} />
     </section>
   );
 }
