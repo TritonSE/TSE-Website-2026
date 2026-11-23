@@ -1,0 +1,194 @@
+.hero {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+
+  padding: 0 50px 56px;
+
+  pointer-events: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 28px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 6px;
+}
+
+.eyebrow {
+  color: #f4b82e;
+
+  font-family: var(--font-sometype-mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.heading {
+  max-width: 540px;
+  margin: 0;
+
+  color: #fffffb;
+
+  font-family: var(--font-stack-sans-notch), sans-serif;
+  font-optical-sizing: auto;
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.ctas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 24px;
+
+  margin-top: 8px;
+
+  pointer-events: auto;
+}
+
+/* Button styling lives in Button.module.css (shared component) */
+
+/* Dot/text styling lives in BlinkingLocation.module.css (shared component) */
+.desktopLocation {
+  pointer-events: auto;
+}
+
+.hero .mobileLocation {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    display: block;
+
+    padding: 0 28px;
+
+    pointer-events: none;
+  }
+
+  .content {
+    position: absolute;
+
+    top: 34%;
+    left: 32px;
+    right: 28px;
+
+    gap: 0;
+  }
+
+  .intro {
+    gap: 26px;
+  }
+
+  .eyebrow {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+
+  .heading {
+    width: 100%;
+    max-width: 300px;
+
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.08;
+  }
+
+  .hero .mobileLocation {
+    display: inline-flex;
+
+    margin-top: 26px;
+  }
+
+  .hero .desktopLocation {
+    display: none;
+  }
+
+  /* Shrink BlinkingLocation's dot (first span) and text (last span) */
+  .mobileLocation > span:first-child {
+    width: 8px;
+    height: 8px;
+  }
+
+  .mobileLocation > span:last-child {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .ctas {
+    width: 100%;
+
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: nowrap;
+
+    gap: 14px;
+
+    margin-top: 30px;
+  }
+
+  .ctas > * {
+    flex: 0 0 auto;
+  }
+
+  .ctas .heroButton {
+    width: auto;
+
+    padding: 11px 14px;
+
+    font-size: 12px;
+    letter-spacing: 0.5px;
+
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero {
+    padding: 0 22px;
+  }
+
+  .content {
+    left: 32px;
+    right: 22px;
+  }
+
+  .heading {
+    max-width: 280px;
+
+    font-size: 32px;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+  }
+
+  .ctas {
+    gap: 20px;
+  }
+
+  .ctas .heroButton {
+    width: auto;
+    padding: 10px 12px;
+  }
+}

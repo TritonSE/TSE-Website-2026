@@ -32,37 +32,28 @@ npm run dev
 ```
 Runs on http://localhost:3001.
 
-### Linting
+Linting
 
 Run from either frontend or backend:
 
-```bash
 npm run lint
 npm run format-check
-```
 
-### Automatically format files:
+Automatically format files:
 
-```bash
 npm run format
-```
+Build
 
-## Build
+Frontend:
 
-### Frontend:
-
-```bash
 cd frontend
 npm run build
-```
 
-### Backend:
+Backend:
 
-```bash
 cd backend
 npm run build
 npm start
-```
 
 ## Git Hooks
 

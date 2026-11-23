@@ -1,69 +1,68 @@
-import Image from "next/image";
+import Footer from "@/components/home/Footer";
+import ImpactStats from "@/components/home/ImpactStats";
+import Hero from "@/components/Hero";
+import Navbar from "@/components/Navbar";
+import QuoteReveal from "@/components/home/QuoteReveal";
+import CompanyCarousel from "@/components/home/CompanyCarousel";
+import PeopleSection from "@/components/home/PeopleSection";
+import AboutUs from "@/components/home/AboutUs";
+import ProjectsCarousel from "@/components/home/ProjectsCarousel";
+import WorkWithUs from "@/components/home/WorkWithUs";
+
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main>
+      <div
+        style={{
+          position: "relative",
+          height: "350vh",
+        }}
+      >
+        {/* Quote sits behind the hero */}
+        <div
+          style={{
+            position: "sticky",
+            top: 0,
+            height: "100vh",
+            zIndex: 0,
+          }}
+        >
+          <QuoteReveal />
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        {/* Hero sits on top and scrolls upward normally */}
+        <section className={styles.heroSection}>
+          <Navbar />
+          <Hero />
+        </section>
+      </div>
+
+      {/* Everything after the quote is normal page flow */}
+      <ProjectsCarousel />
+
+      <CompanyCarousel />
+
+      <section
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#08090a",
+          fontSize: "48px",
+        }}
+      >
+        <ImpactStats />
+        <AboutUs />
+        <PeopleSection />
+
+        <WorkWithUs />
+
+        <Footer />
+      </section>
+    </main>
   );
 }
