@@ -88,6 +88,8 @@
   gap: 24px;
 
   width: max-content;
+  transform: translateX(var(--track-offset, 0px));
+  transition: transform 0.45s ease;
   will-change: transform;
 }
 
@@ -190,11 +192,76 @@
     width: 100%;
   }
 
+  /* Native horizontal scroll with snapping. The viewport bleeds past the
+     section's side padding so cards scroll off the screen edge, and
+     scroll-padding keeps the snap line in line with the intro text. The
+     track gap is smaller than that padding, so a sliver of the previous
+     card stays visible on the left. Breakpoint must match MOBILE_QUERY in
+     ProjectsCarousel.tsx. */
   .viewport {
-    width: 100%;
+    width: calc(100% + 48px);
+    margin: 0 -24px;
+
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 24px;
+    scrollbar-width: none;
+    touch-action: auto;
+  }
+
+  .viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .track {
+    align-items: stretch;
+    height: auto;
+    gap: 16px;
+    padding: 0 24px;
+
+    transform: none;
+    transition: none;
+    will-change: auto;
   }
 
   .card {
-    width: 60vw;
+    width: min(60vw, 400px);
+    height: auto;
+    padding: 12px;
+    border-width: 2px;
+
+    scroll-snap-align: start;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 11 / 10;
+  }
+
+  .imageArrow {
+    top: 8px;
+    right: 8px;
+  }
+
+  .cardTitle {
+    margin: 16px 0 10px 0;
+    font-size: 18px;
+  }
+
+  .cardDescription {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+
+    font-size: 14px;
+  }
+
+  /* Own snap stop at the end of the track, otherwise mandatory snapping
+     stops at the last card and can leave this button partly off-screen */
+  .seeMore {
+    align-self: center;
+    scroll-snap-align: end;
   }
 }

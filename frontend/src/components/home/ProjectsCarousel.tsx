@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  type CSSProperties,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -52,6 +53,24 @@ const projects: Project[] = [
   },
 ];
 
+// Must match the max-width breakpoint in ProjectsCarousel.module.css that
+// switches the track from click-to-advance to native scroll + scroll-snap
+const MOBILE_QUERY = "(max-width: 900px)";
+
+const isMobileLayout = () => window.matchMedia(MOBILE_QUERY).matches;
+
+// Horizontal distance from a card's left edge to the snap line, which sits
+// at the viewport's left edge plus its scroll-padding
+function distanceToSnapLine(viewport: HTMLElement, card: HTMLElement) {
+  const snapPadding =
+    parseFloat(getComputedStyle(viewport).scrollPaddingLeft) || 0;
+  return (
+    card.getBoundingClientRect().left -
+    viewport.getBoundingClientRect().left -
+    snapPadding
+  );
+}
+
 export default function ProjectsCarousel() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLAnchorElement | null>>([]);
@@ -82,17 +101,78 @@ export default function ProjectsCarousel() {
     recomputeOffset();
   }, [recomputeOffset]);
 
+  // Mobile: the track scrolls natively, so the active card is whichever one
+  // sits closest to the snap line
+  const syncActiveFromScroll = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!viewport || !isMobileLayout()) return;
+
+    let nearestIndex = 0;
+    let nearestDistance = Infinity;
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return;
+      const distance = Math.abs(distanceToSnapLine(viewport, card));
+      if (distance < nearestDistance) {
+        nearestIndex = index;
+        nearestDistance = distance;
+      }
+    });
+    setActiveIndex(nearestIndex);
+  }, []);
+
+  const scrollToCard = useCallback((index: number) => {
+    const viewport = viewportRef.current;
+    const card = cardRefs.current[index];
+    if (!viewport || !card) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    viewport.scrollBy({
+      left: distanceToSnapLine(viewport, card),
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+  }, []);
+
   useEffect(() => {
     const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(syncActiveFromScroll);
+    };
+
+    viewport.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      viewport.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, [syncActiveFromScroll]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+
+    const handleResize = () => {
+      // Desktop clips the viewport and moves the track with a transform, so
+      // drop any scroll position left over from the mobile layout
+      if (viewport && !isMobileLayout() && viewport.scrollLeft !== 0) {
+        viewport.scrollLeft = 0;
+      }
+      recomputeOffset();
+      syncActiveFromScroll();
+    };
+
     if (!viewport || !window.ResizeObserver) {
-      window.addEventListener("resize", recomputeOffset);
-      return () => window.removeEventListener("resize", recomputeOffset);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
     }
 
-    const observer = new ResizeObserver(recomputeOffset);
+    const observer = new ResizeObserver(handleResize);
     observer.observe(viewport);
     return () => observer.disconnect();
-  }, [recomputeOffset]);
+  }, [recomputeOffset, syncActiveFromScroll]);
 
   return (
     <section className={styles.section}>
@@ -123,10 +203,7 @@ export default function ProjectsCarousel() {
       <div className={styles.viewport} ref={viewportRef}>
         <div
           className={styles.track}
-          style={{
-            transform: `translateX(${baseOffset}px)`,
-            transition: "transform 0.45s ease",
-          }}
+          style={{ "--track-offset": `${baseOffset}px` } as CSSProperties}
         >
           {/* BEGIN CARD */}
           {projects.map((project, index) => (
@@ -140,8 +217,11 @@ export default function ProjectsCarousel() {
                 index === activeIndex ? styles.cardActive : ""
               }`}
               onClick={(e) => {
-                if (index !== activeIndex) {
-                  e.preventDefault();
+                if (index === activeIndex) return;
+                e.preventDefault();
+                if (isMobileLayout()) {
+                  scrollToCard(index);
+                } else {
                   goToIndex(index);
                 }
               }}
@@ -152,7 +232,7 @@ export default function ProjectsCarousel() {
                   alt={project.title}
                   fill
                   className={styles.image}
-                  sizes="(max-width: 768px) 80vw, 320px"
+                  sizes="(max-width: 900px) 60vw, 400px"
                   draggable={false}
                 />
                 <span
@@ -169,7 +249,7 @@ export default function ProjectsCarousel() {
             </Link>
           ))}
           {/* END CARD */}
-          <div>
+          <div className={styles.seeMore}>
             <Button>See More</Button>
           </div>
         </div>
