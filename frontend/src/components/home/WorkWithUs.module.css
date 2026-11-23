@@ -1,4 +1,6 @@
 .section {
+  position: relative;
+
   --wwu-card-width: 560px;
   --wwu-card-gap: 12px;
 
@@ -14,6 +16,9 @@
 }
 
 .intro {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   width: 40vw;
   flex-shrink: 0;
@@ -190,6 +195,12 @@
 
   .intro {
     width: 100%;
+    padding: 0;
+  }
+
+  .heading {
+    width: auto;
+    max-width: 435px;
   }
 
   .cardsViewport {
@@ -198,5 +209,108 @@
 
   .card {
     width: min(var(--wwu-card-width), 80vw);
+  }
+}
+
+/* ---- Mobile drawers (hidden on desktop) ---- */
+.mobileBackground,
+.drawers {
+  display: none;
+}
+
+.mobileBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Darken the photo so white text stays legible. */
+.mobileBackground::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    180deg,
+    rgba(8, 9, 10, 0.9) 0%,
+    rgba(8, 9, 10, 0.55) 45%,
+    rgba(8, 9, 10, 0.75) 100%
+  );
+}
+
+.mobileBackgroundImage {
+  object-fit: cover;
+}
+
+.drawers {
+  width: 100%;
+  margin-top: 6px;
+
+  color: #fffffb;
+}
+
+.drawer {
+  background: rgba(8, 9, 10, 0.15);
+  transition:
+    background var(--drawer-duration) var(--drawer-easing),
+    backdrop-filter var(--drawer-duration) var(--drawer-easing);
+}
+
+/* Frosted glass behind expanded drawers. */
+.drawer[data-open="true"] {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer {
+    transition: none;
+  }
+}
+
+.drawerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.drawerDescription {
+  margin: 0;
+
+  color: #ebeced;
+}
+
+.drawerActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 700px) {
+  /* Match PeopleSection's mobile gutter so the left edges line up. */
+  .section {
+    padding: 64px 16px;
+  }
+
+  .mobileBackground {
+    display: block;
+  }
+
+  .drawers {
+    display: block;
+  }
+
+  /* Drawers replace the carousel and its arrows on mobile. */
+  .nav,
+  .cardsViewport {
+    display: none;
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+
+  .body {
+    font-size: 14px;
   }
 }

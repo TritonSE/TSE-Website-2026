@@ -1,0 +1,107 @@
+/* Stacked list of drawers. */
+.group {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: var(--drawer-group-gap, 10px);
+}
+
+.drawer {
+  /*
+   * Sizing/color hooks are read with fallbacks (not declared here) so a page
+   * setting them on the drawer or any ancestor always wins:
+   *   --drawer-title-size (24px), --drawer-title-weight (700),
+   *   --drawer-body-size (14px), --drawer-padding (16px),
+   *   --drawer-border-color (currentColor)
+   */
+
+  /*
+   * Figma "Smart animate" spring: mass 1, stiffness 80, damping 20.
+   * Slightly overdamped (zeta ~1.12), so no overshoot. Sampled into
+   * linear(); reaches 99% of the way at ~0.92s.
+   */
+  --drawer-duration: 1s;
+  --drawer-easing: linear(
+    0, 0.0724, 0.2145, 0.3644, 0.4986, 0.6103, 0.6999, 0.7702, 0.8246,
+    0.8664, 0.8984, 0.9228, 0.9414, 0.9555, 0.9663, 0.9744, 0.9806, 0.9853,
+    0.9888, 0.9915, 1
+  );
+
+  border: 1px solid var(--drawer-border-color, currentColor);
+  color: inherit;
+}
+
+.heading {
+  margin: 0;
+}
+
+.toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px var(--drawer-padding, 16px);
+
+  border: none;
+  background: transparent;
+
+  color: inherit;
+  font-family: var(--font-stack-sans-notch);
+  font-size: var(--drawer-title-size, 24px);
+  font-weight: var(--drawer-title-weight, 700);
+  line-height: normal;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.icon {
+  flex-shrink: 0;
+  transition: transform var(--drawer-duration) var(--drawer-easing);
+}
+
+.open .icon {
+  transform: rotate(45deg);
+}
+
+/* Animate height via the 0fr -> 1fr grid-row trick. */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--drawer-duration) var(--drawer-easing);
+}
+
+.open .panel {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  min-height: 0;
+  padding: 0 var(--drawer-padding, 16px);
+
+  font-family: var(--font-stack-sans-text);
+  font-size: var(--drawer-body-size, 14px);
+  font-weight: 400;
+  line-height: 145%;
+
+  overflow: hidden;
+  /* Fade the whole block in so text doesn't appear line by line. */
+  opacity: 0;
+  transition:
+    padding var(--drawer-duration) var(--drawer-easing),
+    opacity var(--drawer-duration) var(--drawer-easing);
+}
+
+.open .panelInner {
+  padding-bottom: var(--drawer-padding, 16px);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon,
+  .panel,
+  .panelInner {
+    transition: none;
+  }
+}

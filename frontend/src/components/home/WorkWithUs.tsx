@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import Button from "@/components/Button";
+import Drawer, { DrawerGroup } from "@/components/Drawer";
 import ChevronLeft from "@/components/icons/ChevronLeft";
 import ChevronRight from "@/components/icons/ChevronRight";
 import OptionWheel, {
@@ -21,6 +22,10 @@ import styles from "./WorkWithUs.module.css";
 
 interface WorkWithUsCard {
   label: string;
+  /** Heading shown on the mobile drawer. */
+  title: string;
+  /** Where the mobile drawer's single button links. */
+  drawerHref: string;
   image: string;
   description: string;
   primary: { label: string; href: string };
@@ -30,6 +35,8 @@ interface WorkWithUsCard {
 const cards: WorkWithUsCard[] = [
   {
     label: "SPONSORS",
+    title: "For Sponsors",
+    drawerHref: "/sponsors",
     image: "/images/dial/dial-3.png",
     description:
       "With zero student fees and working completely pro-bono for our clients, we appreciate any sponsorships or donations to help offset our costs. Reach out to find out how you can make a difference today.",
@@ -38,6 +45,8 @@ const cards: WorkWithUsCard[] = [
   },
   {
     label: "MEMBERS",
+    title: "For Members",
+    drawerHref: "/members",
     image: "/images/dial/dial-1.png",
     description:
       "Interested in joining TSE as a designer or developer? Our applications open in mid-September every Fall quarter. Connect with us at our info sessions and many other recruiting events every year.",
@@ -46,6 +55,8 @@ const cards: WorkWithUsCard[] = [
   },
   {
     label: "NONPROFITS",
+    title: "For Nonprofits",
+    drawerHref: "/nonprofits",
     image: "/images/dial/dial-2.png",
     description:
       "Is your non-profit interested in working with us? We look for new clients every spring through summer, but reach out at any time of year with questions. Learn more about our workflow below!",
@@ -55,6 +66,34 @@ const cards: WorkWithUsCard[] = [
 ];
 
 const wheelItems = cards.map((card) => card.label);
+
+// Mobile drawers follow the Figma order, which differs from the wheel's.
+const drawerOrder = ["MEMBERS", "NONPROFITS", "SPONSORS"];
+const drawerCards = drawerOrder
+  .map((label) => cards.find((card) => card.label === label))
+  .filter((card): card is WorkWithUsCard => card !== undefined);
+const MOBILE_BACKGROUND = "/images/dial/dial-1.png";
+
+function MobileDrawers() {
+  return (
+    <div className={styles.drawers}>
+      <DrawerGroup>
+        {drawerCards.map((card) => (
+          <Drawer key={card.label} title={card.title} className={styles.drawer}>
+            <div className={styles.drawerContent}>
+              <p className={styles.drawerDescription}>{card.description}</p>
+              <div className={styles.drawerActions}>
+                <Button href={card.drawerHref} variant="light" arrow>
+                  {card.secondary.label}
+                </Button>
+              </div>
+            </div>
+          </Drawer>
+        ))}
+      </DrawerGroup>
+    </div>
+  );
+}
 
 const CLONE_COUNT = 3;
 const leadingClones = cards.slice(-CLONE_COUNT);
@@ -149,6 +188,16 @@ export default function WorkWithUs() {
 
   return (
     <section className={styles.section}>
+      <div className={styles.mobileBackground} aria-hidden="true">
+        <Image
+          src={MOBILE_BACKGROUND}
+          alt=""
+          fill
+          sizes="100vw"
+          className={styles.mobileBackgroundImage}
+        />
+      </div>
+
       <div className={styles.intro}>
         <h2 className={styles.heading}>
           Let&rsquo;s create something{" "}
@@ -185,6 +234,8 @@ export default function WorkWithUs() {
             <ChevronRight />
           </button>
         </div>
+
+        <MobileDrawers />
       </div>
 
       <div className={styles.wheel}>
